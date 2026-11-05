@@ -16,3 +16,9 @@
 - 新增 `docs/SO101采集容器REST最小接入指南-20261104-v10r15r1.md`，明确移除 align、忽略 is_sim、采集结束不停止独立从臂跟随，以及 202 / 本地封存完成 / 远端 READY 的区别。
 - 旧 v10r11 指南逐字节保留在 `docs/history/`；测试摘要位于 `docs/sim-chain-full-v15r1-acceptance.json`。
 - 本次仅补充验证与文档，应用源码、镜像标签和运行容器未变。
+
+## Perceptor ROS 订阅接入说明（2026-11-04）
+
+- 新增状态 `/so101/state` 与主臂 `/so101/action` 的接入文档及完整实测消息样本；约 6 秒只读探针收到 30 条 state / 181 条 action。
+- 明确从臂 ticks 到观测单位的映射、原始采样时刻、Perceptor 钩子接法，以及主臂节点是现有 teleop 动作队列写入者。
+- Perceptor 本轮未修改，仍使用 ARM_INSPECT；改成订阅后的采集消费链路需要接入同事另行验证。Composer 高层动作也不能冒充连续六轴 action 标签。

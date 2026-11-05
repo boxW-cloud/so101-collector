@@ -1,0 +1,251 @@
+{
+  "schema": "so101.ros-subscription-samples.v1",
+  "verified_date": "2026-11-04",
+  "timezone": "America/Los_Angeles",
+  "ros_domain_id": 96,
+  "ros_message_type": "std_msgs/msg/String",
+  "state_topic": "/so101/state",
+  "action_topic": "/so101/action",
+  "counts": {
+    "state": 30,
+    "action": 181
+  },
+  "rates_hz": {
+    "state": 4.98,
+    "action": 30.58
+  },
+  "graph_excluding_probe": {
+    "/so101/state": {
+      "publishers": [
+        {
+          "node": "seeed_follower_actions",
+          "namespace": "/so101_follower_sim"
+        }
+      ],
+      "subscribers": []
+    },
+    "/so101/action": {
+      "publishers": [
+        {
+          "node": "so101_leader",
+          "namespace": "/"
+        }
+      ],
+      "subscribers": [
+        {
+          "node": "seeed_follower_actions",
+          "namespace": "/so101_follower_sim"
+        }
+      ]
+    }
+  },
+  "state_message": {
+    "action": "ARM_STATE",
+    "params": {
+      "status": "SUCCEEDED",
+      "result": {
+        "robot_id": "so101-follower-isaac",
+        "device_id": "isaac:so101-isaac-console",
+        "bound": false,
+        "epoch": 19,
+        "lease_remaining_s": 0.0,
+        "workspace_confirmed_for_ros": false,
+        "active_request_id": null,
+        "native": {
+          "connected": true,
+          "session_id": "5c9424e0cac14d2e9d8275c0d4d458f4",
+          "revision": 0,
+          "phase": "HOLDING",
+          "profile_id": "isaac-so101-console",
+          "fault": null,
+          "feedback_age_s": 0.0,
+          "feedback_fresh": true,
+          "consent_active": false,
+          "native_control_available": true,
+          "joints": [
+            {
+              "id": 1,
+              "name": "shoulder_pan",
+              "position": 2200,
+              "goal": 2200,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            },
+            {
+              "id": 2,
+              "name": "shoulder_lift",
+              "position": 944,
+              "goal": 899,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            },
+            {
+              "id": 3,
+              "name": "elbow_flex",
+              "position": 3060,
+              "goal": 3148,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            },
+            {
+              "id": 4,
+              "name": "wrist_flex",
+              "position": 2892,
+              "goal": 2891,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            },
+            {
+              "id": 5,
+              "name": "wrist_roll",
+              "position": 3150,
+              "goal": 3151,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            },
+            {
+              "id": 6,
+              "name": "gripper",
+              "position": 2031,
+              "goal": 2031,
+              "torque": true,
+              "temperature": 30,
+              "voltage_raw": 120,
+              "status": 0
+            }
+          ],
+          "sample_seq": 57179,
+          "sampled_mono_ns": 1462812353971016,
+          "sampled_unix": 1793861367.041891,
+          "source": {
+            "kind": "isaac_sample",
+            "time_ns": 1462812305667502
+          },
+          "tool": {
+            "position_m": [
+              0.14344,
+              -0.02531,
+              0.00778
+            ],
+            "orientation_rpy": [
+              -2.75469,
+              -0.02726,
+              -1.66662
+            ]
+          },
+          "follow": {
+            "enabled": true,
+            "following": true,
+            "action_seq": 344104,
+            "action_process_id": "so101-leader:0f3177bfc1f74080b0554b50602fe611",
+            "action_age_s": 0.008
+          }
+        },
+        "control_mode": "direct",
+        "requires_bind": false,
+        "requires_epoch": false,
+        "requires_heartbeat": false,
+        "requires_workspace_confirmation": false
+      }
+    }
+  },
+  "action_message": {
+    "schema_version": "teleop/action/v1",
+    "robot_type": "so-101-follower_sim",
+    "process_id": "so101-leader:0f3177bfc1f74080b0554b50602fe611",
+    "action_id": "0f3177bfc1f74080b0554b50602fe611:344106",
+    "seq": 344106,
+    "source": "teleop_leader",
+    "leader_serial": "5A7C124026",
+    "time_basis": "host_monotonic",
+    "timestamp": 1462812.410393,
+    "sampled_unix": 1793861367.100185,
+    "input_observation_id": null,
+    "positions": {
+      "shoulder_pan": 9.3626,
+      "shoulder_lift": -103.7802,
+      "elbow_flex": 96.9231,
+      "wrist_flex": 78.2418,
+      "wrist_roll": 97.011,
+      "gripper": 1.7107
+    },
+    "units": {
+      "shoulder_pan": "deg",
+      "shoulder_lift": "deg",
+      "elbow_flex": "deg",
+      "wrist_flex": "deg",
+      "wrist_roll": "deg",
+      "gripper": "normalized_0_100"
+    },
+    "raw": {
+      "shoulder_pan": 2148,
+      "shoulder_lift": 841,
+      "elbow_flex": 3138,
+      "wrist_flex": 2919,
+      "wrist_roll": 3151,
+      "gripper": 2046
+    },
+    "rate_hz": 30.0
+  },
+  "normalized_state_using_existing_perceptor_function": {
+    "shoulder_pan": 9.31868131868132,
+    "shoulder_lift": -99.78021978021978,
+    "elbow_flex": 89.23076923076923,
+    "wrist_flex": 78.32967032967034,
+    "wrist_roll": 96.92307692307692,
+    "gripper": 1.6857720836142953
+  },
+  "encoder_mapping": {
+    "shoulder_pan": {
+      "min_tick": 731,
+      "max_tick": 3457,
+      "unit": "deg"
+    },
+    "shoulder_lift": {
+      "min_tick": 870,
+      "max_tick": 3288,
+      "unit": "deg"
+    },
+    "elbow_flex": {
+      "min_tick": 928,
+      "max_tick": 3162,
+      "unit": "deg"
+    },
+    "wrist_flex": {
+      "min_tick": 808,
+      "max_tick": 3194,
+      "unit": "deg"
+    },
+    "wrist_roll": {
+      "min_tick": 0,
+      "max_tick": 4095,
+      "unit": "deg"
+    },
+    "gripper": {
+      "min_tick": 2006,
+      "max_tick": 3489,
+      "unit": "normalized_0_100"
+    }
+  },
+  "notes": [
+    "The state and action examples are independent topic samples, not a time-paired training row.",
+    "Perceptor still polls ARM_INSPECT; subscriber consumer migration has not been implemented.",
+    "Leader already owns teleop/action/v1 Redis writes. Do not duplicate them from a Perceptor subscription."
+  ],
+  "perceptor_state_subscription_migrated": false,
+  "perceptor_source_hashes": {
+    "/app/robot/current/so101_capture.py": "e2c1d38b971dfadc1b3cfb6291cf3c6846bb72af2b6a4fdfc0fd3ee6cb4370d6",
+    "/app/data_profile/so-101-follower_sim.json": "cce14ad11fb75a553917b840e7bc611d33b8498122cfde660d4e09bff917bc3f"
+  },
+  "production_code_changed": false
+}
