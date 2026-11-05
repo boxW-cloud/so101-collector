@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f4f6fa">
+  <title>机器人数据采集工作台</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script src="/static/app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#collection-controls">跳到采集控制</a>
+  <header class="page-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v7c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12v7c0 1.7 3.6 3 8 3s8-1.3 8-3v-7"/></svg>
+      </span>
+      <h1>机器人数据采集工作台</h1>
+    </div>
+    <div class="header-status">
+      <span id="connection-badge" class="connection-badge tone-neutral"><span class="status-dot" aria-hidden="true"></span><span id="connection-label">正在连接服务</span></span>
+      <span id="header-state" class="badge tone-neutral">状态待确认</span>
+    </div>
+  </header>
+
+  <main class="page-content">
+    <section class="toolbar" aria-label="采集设置">
+      <div class="field mode-field">
+        <label for="mode-select">采集模式</label>
+        <select id="mode-select" disabled>
+          <option value="simulation_teleop">仿真遥操</option>
+          <option value="physical_teleop">真机遥操</option>
+        </select>
+      </div>
+      <div class="recent-summary">
+        <span class="field-label">最近数据</span>
+        <strong id="recent-title">正在读取数据摘要</strong>
+        <span id="recent-detail" class="secondary">已保存的数据将在这里显示</span>
+      </div>
+      <div class="field robot-field">
+        <label for="robot-select">机器人</label>
+        <select id="robot-select" disabled><option value="">正在读取机器人</option></select>
+      </div>
+    </section>
+
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden>
+      <span class="notice-mark" aria-hidden="true">i</span><p id="notice-text"></p>
+    </div>
+
+    <div class="workbench">
+      <section class="video-panel" aria-labelledby="video-title">
+        <div class="panel-header video-header">
+          <h2 id="video-title">仿真画面</h2>
+          <div class="media-controls">
+            <select id="camera-select" aria-label="选择画面" hidden></select>
+            <span id="video-badge" class="badge tone-neutral">等待画面</span>
+          </div>
+        </div>
+        <div id="video-stage" class="video-stage" aria-busy="false">
+          <video id="camera-image" aria-label="机器人实时视频" autoplay muted playsinline hidden></video>
+          <div id="video-overlay" class="video-overlay">
+            <div class="camera-symbol" aria-hidden="true">
+              <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="7" y="16" width="31" height="25" rx="4"/><path d="m38 24 10-6v22l-10-6M18 26h9M22.5 21.5v9"/></svg>
+            </div>
+            <h3 id="video-empty-title">等待仿真画面</h3>
+            <p id="video-empty-description">连接服务后，相机画面将在这里显示。</p>
+          </div>
+          <span id="image-time" class="image-time" hidden></span>
+        </div>
+        <div class="video-footer">
+          <svg aria-hidden="true" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="8" width="12" height="9" rx="2"/><path d="M6.5 8V5a3.5 3.5 0 0 1 7 0v3"/></svg>
+          <span>画面由服务提供，无需直接访问设备主机。</span>
+        </div>
+        <p id="following-status" class="following-status tone-warning" role="status" aria-live="polite">跟随待确认或已中断，请检查并结束当前会话</p>
+      </section>
+
+      <aside class="right-column">
+        <section id="collection-controls" class="collection-panel" aria-labelledby="collection-title">
+          <div class="collection-heading">
+            <h2 id="collection-title">仿真遥操采集</h2>
+            <p id="collection-subtitle">手动遥操，逐条保存示教数据。</p>
+          </div>
+          <div id="task-label" class="task-label" hidden><span>当前任务</span><strong id="task-name"></strong></div>
+
+          <div class="action-grid">
+            <button id="start-button" class="button button-primary" type="button" disabled><span class="button-icon" aria-hidden="true">▷</span><span>开始采集</span></button>
+            <button id="redo-button" class="button button-secondary" type="button" disabled><span class="button-icon" aria-hidden="true">↻</span><span>重采本条</span></button>
+            <button id="complete-button" class="button button-outline" type="button" disabled><span class="button-icon" aria-hidden="true">✓</span><span>完成本条</span></button>
+            <button id="stop-button" class="button button-secondary" type="button" disabled><span class="stop-symbol" aria-hidden="true"></span><span>结束采集</span></button>
+          </div>
+          <p id="action-help" class="action-help">正在确认服务与机器人状态。</p>
+          <p class="stop-help">结束采集后，当前条自动保存，数据在后台自动上传。无需其他操作。</p>
+
+          <div id="operation-panel" class="operation-panel" role="status" aria-live="polite" hidden>
+            <span id="operation-spinner" class="spinner" aria-hidden="true" hidden></span>
+            <div class="operation-content"><p id="operation-text"></p><button id="retry-button" class="text-button" type="button" hidden>重试原操作</button></div>
+          </div>
+
+          <dl class="collection-status">
+            <div><dt>采集状态</dt><dd><span id="collection-state" class="status-value">待确认</span></dd></div>
+            <div><dt>当前条</dt><dd id="episode-number">—</dd></div>
+            <div><dt>当前帧数</dt><dd><span id="frame-count">—</span><span class="unit">帧</span></dd></div>
+          </dl>
+          <p id="committed-count" class="committed-count">正在读取已完成条数</p>
+          <details id="session-details" class="technical-details" hidden>
+            <summary>查看采集记录标识</summary>
+            <dl><div><dt>会话</dt><dd id="session-id"></dd></div><div><dt>本条</dt><dd id="episode-id"></dd></div><div id="request-row" hidden><dt>待确认操作</dt><dd id="request-id"></dd></div><div id="committed-row" hidden><dt>已提交本条</dt><dd id="committed-episode-id"></dd></div></dl>
+          </details>
+          <div id="resume-panel" class="resume-panel" hidden><p>存在已保留的采集进度。</p><button id="resume-button" class="text-button" type="button">恢复保留的采集</button></div>
+        </section>
+
+        <section class="saved-panel" aria-labelledby="saved-title">
+          <div class="panel-header"><h2 id="saved-title">已保存数据</h2><span id="dataset-count" class="count-badge">—</span></div>
+          <div id="datasets-empty" class="datasets-empty"><span class="empty-data-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4"><ellipse cx="16" cy="7" rx="9" ry="3.5"/><path d="M7 7v9c0 2 4 3.5 9 3.5s9-1.5 9-3.5V7M7 16v8c0 2 4 3.5 9 3.5s9-1.5 9-3.5v-8"/></svg></span><strong id="datasets-empty-title">正在读取已保存数据</strong><p id="datasets-empty-text">请稍候</p></div>
+          <ul id="dataset-list" class="dataset-list" aria-label="已保存数据列表" hidden></ul>
+        </section>
+      </aside>
+    </div>
+    <footer class="page-footer"><span>机器人数据采集工作台</span><span id="refresh-status">正在同步状态</span></footer>
+  </main>
+
+  <dialog id="task-dialog" aria-labelledby="dialog-title" aria-describedby="dialog-description">
+    <form id="task-form">
+      <div class="dialog-heading"><h2 id="dialog-title">开始新的采集任务</h2><button id="dialog-close" class="icon-button" type="button" aria-label="关闭任务窗口">×</button></div>
+      <p id="dialog-description" class="dialog-description">为这次采集填写名称，便于之后查找数据。</p>
+      <div class="field"><label for="task-name-input">任务名称 <span class="required-label">必填</span></label><input id="task-name-input" name="name" type="text" maxlength="120" autocomplete="off" placeholder="例如：桌面物体抓取" required><p id="name-error" class="field-error" hidden>请输入任务名称。</p></div>
+      <div class="field"><label for="task-description-input">任务描述 <span class="optional-label">选填</span></label><textarea id="task-description-input" name="description" rows="3" maxlength="2000" placeholder="记录采集目标或操作要点"></textarea></div>
+      <p id="dialog-mode-hint" class="dialog-hint">启动前，请手工连接仿真遥操输入。</p>
+      <label id="workspace-confirmation" class="checkbox-field" hidden><input id="workspace-confirmed" type="checkbox"><span id="workspace-confirmation-text">我已在现场确认工作空间安全，可以执行采集操作。</span></label>
+      <div class="dialog-actions"><button id="dialog-cancel" class="button button-secondary" type="button">取消</button><button id="dialog-submit" class="button button-primary" type="submit">开始采集</button></div>
+    </form>
+  </dialog>
+  <noscript><div class="noscript-warning">此工作台需要启用 JavaScript 才能读取状态和执行采集操作。</div></noscript>
+</body>
+</html>

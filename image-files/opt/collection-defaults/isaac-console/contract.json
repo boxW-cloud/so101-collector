@@ -1,0 +1,47 @@
+{
+  "robot_id": "so101-isaac-console",
+  "calibration_hash": "sha256:d62adbbf46c050a734a55a60aea1bc17d0f6d365327555db5f3b00d8bda4f2e2",
+  "names": [
+    "shoulder_pan.pos",
+    "shoulder_lift.pos",
+    "elbow_flex.pos",
+    "wrist_flex.pos",
+    "wrist_roll.pos",
+    "gripper.pos"
+  ],
+  "units": {
+    "shoulder_pan.pos": "deg",
+    "shoulder_lift.pos": "deg",
+    "elbow_flex.pos": "deg",
+    "wrist_flex.pos": "deg",
+    "wrist_roll.pos": "deg",
+    "gripper.pos": "normalized_0_100"
+  },
+  "limits": {
+    "shoulder_pan.pos": [
+      -110.0,
+      110.0
+    ],
+    "shoulder_lift.pos": [
+      -100.0,
+      100.0
+    ],
+    "elbow_flex.pos": [
+      -100.0,
+      90.0
+    ],
+    "wrist_flex.pos": [
+      -95.0,
+      95.0
+    ],
+    "wrist_roll.pos": [
+      -160.0,
+      160.0
+    ],
+    "gripper.pos": [
+      0.0,
+      100.0
+    ]
+  },
+  "source": "simulation-only; not a physical calibration"
+}

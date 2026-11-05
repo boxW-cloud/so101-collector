@@ -1,0 +1,8 @@
+{
+  "is_sim": true,
+  "image": "so101-controller:unified-20261104-statepush",
+  "serial_port": "/dev/serial/by-id/usb-1a86_USB_Single_Serial_5A7C124107-if00",
+  "isaac_dir": "/home/nvidia/so101-collection/data/isaac-console",
+  "real_data_dir": "data/real",
+  "sim_data_dir": "data/sim"
+}

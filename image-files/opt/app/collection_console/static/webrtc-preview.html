@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WebRTC 仿真视频预览</title>
+  <style>
+    body { font: 16px/1.6 system-ui, sans-serif; color: #203040; background: #f3f6f9; margin: 0; }
+    main { max-width: 960px; padding: 24px; margin: auto; }
+    h1 { margin: 0 0 12px; font-size: 26px; }
+    .controls { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin: 18px 0; }
+    button, select { font: inherit; padding: 8px 12px; border: 1px solid #aab7c5; border-radius: 6px; }
+    button { cursor: pointer; background: white; } button:disabled { cursor: default; opacity: .5; }
+    video { width: 100%; aspect-ratio: 4/3; background: #101820; border-radius: 8px; }
+    #status { min-height: 26px; } .error { color: #a32121; }
+  </style>
+</head>
+<body><main>
+  <h1>WebRTC 仿真视频预览</h1>
+  <p>独立只读视频入口。当前预览源为 5 fps；连接视频无需主臂输入在线。</p>
+  <div class="controls">
+    <label>机器人 <select id="robot" disabled></select></label>
+    <label>相机 <select id="camera"><option value="front">前置相机</option><option value="wrist">腕部相机</option></select></label>
+    <button id="connect" disabled>连接视频</button><button id="stop" disabled>停止视频</button>
+  </div>
+  <p id="status" role="status" aria-live="polite">正在读取视频目录…</p>
+  <video id="video" autoplay muted playsinline controls></video>
+</main>
+<script type="module">
+  import {WebRTCVideoClient, loadVideoCatalog} from "./webrtc-client.js";
+  const $ = id => document.getElementById(id);
+  const labels = {connecting: "正在连接视频…", gathering: "正在收集视频连接信息…", negotiating: "正在协商视频…", negotiated: "视频已协商，等待画面…", connected: "视频已连接", closed: "视频已停止"};
+  let available = false, intent = 0;
+  function status(message, error = false) { $("status").textContent = message; $("status").className = error ? "error" : ""; }
+  const client = new WebRTCVideoClient($("video"), {
+    legacyTarget: true, // Standalone authenticated video service; collection console uses the bound-target default.
+    onState: event => { $("stop").disabled = ["closed", "error"].includes(event.phase); if (labels[event.phase]) status(labels[event.phase]); },
+    onError: error => status(error.message + "（" + error.code + "）", true),
+  });
+  // Read-only browser verification: await previewClient.getStats() for decoded-frame counters.
+  window.previewClient = client;
+  function reset(message) { intent++; client.close(); $("connect").disabled = !available; $("stop").disabled = true; status(message); }
+  $("stop").onclick = () => reset("视频已停止。");
+  $("camera").onchange = () => reset("已切换相机，点击连接视频。");
+  $("robot").onchange = () => reset("已切换机器人，点击连接视频。");
+  $("connect").onclick = async () => {
+    const current = ++intent; $("connect").disabled = true; $("stop").disabled = false;
+    try { await client.connect({robotKey: $("robot").value, camera: $("camera").value}); }
+    catch (error) { if (current === intent && error.name !== "AbortError") status(error.message, true); }
+    finally { if (current === intent) $("connect").disabled = !available; }
+  };
+  window.addEventListener("pagehide", () => client.close());
+  try {
+    const catalog = await loadVideoCatalog();
+    const robots = catalog.robots.filter(robot => robot.kind === "simulation" && robot.available === true);
+    for (const robot of robots) { const option = document.createElement("option"); option.value = robot.key; option.textContent = robot.label || robot.key; $("robot").append(option); }
+    if (robots.some(robot => robot.key === catalog.selection?.robot_key)) $("robot").value = catalog.selection.robot_key;
+    available = robots.length > 0; $("robot").disabled = !available; $("connect").disabled = !available;
+    status(available ? "选择相机后点击连接视频。" : "暂无可用的仿真视频目标。", !available);
+  } catch { status("无法读取视频目录，请检查入口与网络后刷新页面。", true); }
+</script>
+</body></html>

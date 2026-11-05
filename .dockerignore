@@ -1,0 +1,7 @@
+**
+!Dockerfile
+!image-files/
+!image-files/**
+image-files/**/__pycache__/
+image-files/**/*.pyc
+image-files/**/.pytest_cache/

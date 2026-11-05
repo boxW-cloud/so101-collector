@@ -1,0 +1,210 @@
+{
+  "schema": "so101.native-leader-to-workshop.preview.v2",
+  "status": "three_point_preview_pending_visual_acceptance",
+  "device_role": "leader",
+  "observed_usb_hwid": "USB VID:PID=1A86:7523 SER= LOCATION=1-1",
+  "native_model": "SERVO.C",
+  "source_coordinate": "native_encoder_PDA",
+  "compat_position_rule": "4095 - native_encoder_PDA",
+  "coordinate_rule_evidence": "native-compat-paired-01.json",
+  "mapping_kind": "fixed_three_position_ID2_ID3_ID4_plus_existing_ID1_ID5_relative_and_gripper",
+  "reference_meaning": "user-selected pose; not mechanical zero or normalization midpoint",
+  "motor_configuration_writes": false,
+  "must_not_write_to_motor_calibration": true,
+  "ready_for_collection": false,
+  "ready_for_physical_follower": false,
+  "sim_visual_validation_passed": false,
+  "axes": {
+    "shoulder_pan": {
+      "motor_id": 1,
+      "native_min": 1441,
+      "native_max": 2564,
+      "reference_native": 2031,
+      "spark_normalization_calibration": {
+        "id": 1,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 1531,
+        "range_max": 2654
+      },
+      "spark_input_unit": "normalized_minus100_100",
+      "sim_joint_limits_deg": [
+        -110,
+        110
+      ],
+      "evidence": [
+        "range-02/report.json"
+      ]
+    },
+    "shoulder_lift": {
+      "motor_id": 2,
+      "native_min": 885,
+      "native_max": 3272,
+      "reference_native": 2065,
+      "spark_normalization_calibration": {
+        "id": 2,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 823,
+        "range_max": 3210
+      },
+      "spark_input_unit": "normalized_minus100_100",
+      "sim_joint_limits_deg": [
+        -100,
+        100
+      ],
+      "evidence": [
+        "shoulder-front-position.json",
+        "shoulder-center-position.json",
+        "endpoint-a-label.json"
+      ],
+      "native_center": 2065,
+      "three_point_sim_deg": [
+        100,
+        -13.967752757499994,
+        -100
+      ],
+      "mapping_mode": "fixed_three_point",
+      "physical_angle_accuracy_verified": false
+    },
+    "elbow_flex": {
+      "motor_id": 3,
+      "native_min": 973,
+      "native_max": 3159,
+      "reference_native": 1977,
+      "spark_normalization_calibration": {
+        "id": 3,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 936,
+        "range_max": 3122
+      },
+      "spark_input_unit": "normalized_minus100_100",
+      "sim_joint_limits_deg": [
+        -100,
+        90
+      ],
+      "evidence": [
+        "elbow-id3-three-positions.json"
+      ],
+      "native_center": 1977,
+      "three_point_sim_deg": [
+        90,
+        0,
+        -100
+      ],
+      "mapping_mode": "fixed_three_point",
+      "physical_angle_accuracy_verified": false
+    },
+    "wrist_flex": {
+      "motor_id": 4,
+      "native_min": 868,
+      "native_max": 3201,
+      "reference_native": 2037,
+      "spark_normalization_calibration": {
+        "id": 4,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 894,
+        "range_max": 3227
+      },
+      "spark_input_unit": "normalized_minus100_100",
+      "sim_joint_limits_deg": [
+        -95,
+        95
+      ],
+      "evidence": [
+        "wrist-id4-three-positions.json"
+      ],
+      "native_center": 2037,
+      "three_point_sim_deg": [
+        95,
+        0,
+        -95
+      ],
+      "mapping_mode": "fixed_three_point",
+      "physical_angle_accuracy_verified": false
+    },
+    "wrist_roll": {
+      "motor_id": 5,
+      "native_min": 1668,
+      "native_max": 2896,
+      "reference_native": 1669,
+      "spark_normalization_calibration": {
+        "id": 5,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 1199,
+        "range_max": 2427
+      },
+      "spark_input_unit": "normalized_minus100_100",
+      "sim_joint_limits_deg": [
+        -160,
+        160
+      ],
+      "evidence": [
+        "range-02/report.json",
+        "wrist-clockwise-01.json",
+        "wrist-boundary-01.json"
+      ]
+    },
+    "gripper": {
+      "motor_id": 6,
+      "native_min": 999,
+      "native_max": 2194,
+      "reference_native": 2191,
+      "spark_normalization_calibration": {
+        "id": 6,
+        "drive_mode": 0,
+        "homing_offset": 0,
+        "range_min": 1901,
+        "range_max": 3096
+      },
+      "spark_input_unit": "normalized_0_100",
+      "sim_joint_limits_deg": [
+        -10,
+        100
+      ],
+      "evidence": [
+        "native-open-01.json",
+        "native-closed-01.json",
+        "gripper-reclosed-01.json"
+      ]
+    }
+  },
+  "pending": [
+    "Visual direction/pose verification of new fixed axes",
+    "ID1/ID5 still relative legacy mapping",
+    "Dataset recording not enabled"
+  ],
+  "source_hashes": {
+    "user-reference-01.json": "3f3790bb7f1eb20c6896c9a9aa91d98ea92b46ee6731026a1165b67c5ff690c1",
+    "range-02/report.json": "2bd197aa6b4edb163493251538c2d0ceb7b60c404ead03ee1f6a92876ec913ba",
+    "range-02/samples.jsonl": "ba5cc9c75145414d6ef0100affbabfe78c141e2b16a25b30466c8e9fd3b5ce77",
+    "native-compat-paired-01.json": "af86af2136188cd6397234531a4cdbe9adca90c347a2b398cc92da57eb287ab6",
+    "wrist-boundary-01.json": "23e0bf48c778d75f87de58b9bef9bdb01181e458a245d1ac7609f547e3c49d68",
+    "artifacts\\precision-calibration-20260921\\restart-02\\shoulder-front-position.json": "bb5de6cd79f0804943aae798e213197ed180c4c1b33ac600727d96302b3976bb",
+    "artifacts\\precision-calibration-20260921\\restart-02\\shoulder-center-position.json": "94e7f5c281a524d61733386f3a58bd7a3d23e6248ffee194bd7cb6de678bfa2f",
+    "artifacts\\precision-calibration-20260921\\restart-02\\endpoint-a-label.json": "423581a05abb1fc31baa7d6cb644b09a308b4ec221daa4932a9796215bbd02fc",
+    "artifacts\\precision-calibration-20260921\\restart-02\\elbow-id3-three-positions.json": "30d386873f8bdfb98ed0aaff81af8dd132e60f066b28fd2a9c711c5892f4d95c",
+    "artifacts\\precision-calibration-20260921\\restart-02\\wrist-id4-three-positions.json": "b79dba17eb7aefa6e95bab1229092c7419fe115b0db6418a849fe88007d391f0"
+  },
+  "parent_profile_hash": "sha256:cc7d7542c3ff36128d25db29d32d74c7e1d90f6f957156ce0038753103ba6d78",
+  "updated_motor_ids": [
+    2,
+    3,
+    4
+  ],
+  "unchanged_motor_ids": [
+    1,
+    5,
+    6
+  ],
+  "shoulder_center_basis": "User upright 90-degree reference -> USD Pitch -13.9677527575 degrees from model shoulder-to-elbow geometry. End targets remain virtual limits, not measured endpoint angles.",
+  "other_centers_basis": "ID3/ID4 user center defined as virtual joint zero; visual verification still required.",
+  "excluded_measurements": [
+    "2739/40 degrees",
+    "2966/27 degrees"
+  ],
+  "profile_hash": "sha256:d2c3945328cb4dcd4f0e0c99b6b54a8eb8f28e24e594028fa7482254c4d9b82a"
+}

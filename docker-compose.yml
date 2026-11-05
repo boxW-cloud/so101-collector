@@ -1,0 +1,104 @@
+# SO101 采集容器 v10r15r1。要改的东西都在 .env（采哪台机器人、镜像、目录、上传服务器、Redis、摄像头）；改完执行 ./start.sh。
+# 一台采集容器只采一台机器人（.env 的 COLLECTION_ROBOT）。COLLECTION_ROBOT=so101-sim 时 ./start.sh 还会启动下面的 Isaac 仿真（profile sim）。
+name: so101-collection
+services:
+  collection:
+    image: ${COLLECTION_IMAGE:-so101-collection:20261105-v10r15r1}
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: none
+      args:
+        RUNTIME_IMAGE: so101-collection-runtime:20261015-v10r6-rsync
+    pull_policy: never
+    platform: linux/arm64
+    container_name: ${COLLECTION_CONTAINER_NAME:-so101-collection}
+    restart: unless-stopped
+    network_mode: host
+    ipc: host
+    user: "1000:1000"
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges, label=disable]
+    tmpfs: ["/tmp:rw,size=536870912,mode=1777"]
+    # v10r15 起不读主臂、不控制从臂，不再放行 USB 串口；只放行摄像头（video4linux，主设备号 81）
+    device_cgroup_rules: ["c 81:* rmw"]
+    group_add: ["44"]                # 宿主机的 video（摄像头）组
+    stop_grace_period: 90s
+    environment:
+      SO101_IMAGE_ID: ${COLLECTION_IMAGE_ID:?Run ./start.sh or ./build.sh first}
+    volumes:
+      # 采集数据 + 同步队列（/data/rsync-uploads），必须持久化。Isaac 仿真和它共用 isaac-console 子目录
+      - type: bind
+        source: ${COLLECTION_DATA_DIR:-./data}
+        target: /data
+        bind: {create_host_path: false}
+      # 容器内部凭据（ROS 密钥、内部 API token），首次启动自动生成
+      - type: bind
+        source: ${COLLECTION_SHARED_DIR:-./secrets}
+        target: /shared
+        bind: {create_host_path: false}
+      # apply-env.py 生成的配置：采哪台机器人、上传服务器、Redis、摄像头、视频来源，只读
+      - type: bind
+        source: ${COLLECTION_CONFIG_DIR:-./config}
+        target: /config
+        read_only: true
+        bind: {create_host_path: false}
+      # 旧接口（8920 测试工作台）的本地目录交付
+      - type: bind
+        source: ${COLLECTION_DELIVERY_DIR:-./delivery}
+        target: /delivery
+        bind: {create_host_path: false}
+      # 宿主机 /dev 只读：容器按 /hostdev/v4l/by-path/...（USB 口）找摄像头
+      - type: bind
+        source: /dev
+        target: /hostdev
+        read_only: true
+
+  # Isaac 仿真（COLLECTION_ROBOT=so101-sim 时由 ./start.sh 用 --profile sim 启动；要 NVIDIA GPU）。
+  # 和采集容器只通过共享目录 <COLLECTION_DATA_DIR>/isaac-console 下的文件通信，不需要别的控制容器。
+  isaac:
+    profiles: [sim]
+    image: ${ISAAC_IMAGE:-so101-runtime-isaac:locked-20260923}
+    pull_policy: never
+    container_name: ${ISAAC_CONTAINER_NAME:-so101-isaac}
+    restart: unless-stopped
+    depends_on: [collection]
+    network_mode: host
+    ipc: host
+    user: root
+    cap_drop: [ALL]
+    cap_add: [DAC_OVERRIDE]
+    security_opt: [no-new-privileges, label=disable]
+    working_dir: /workspace/Sim-to-Real-SO-101-Workshop
+    environment:
+      OMP_NUM_THREADS: "4"
+      PYTHONUNBUFFERED: "1"
+    deploy:
+      resources:
+        reservations:
+          devices: [{driver: nvidia, device_ids: ["0"], capabilities: [gpu]}]
+    entrypoint: ["bash", "-c"]
+    command:
+      - |
+        set -e
+        # 采集容器第一次启动时生成 generation.json 和仿真脚本（isaac_harness.py 等），等它们就绪
+        until [ -s /sim/generation.json ] && [ -s /sim/isaac_harness.py ] && [ -s /sim/contract.json ]; do sleep 2; done
+        GENERATION=$$(grep -o '"generation": *"[0-9a-f]*"' /sim/generation.json | grep -o '[0-9a-f]\{32\}')
+        ISAAC_SIM=/workspace/isaaclab/_isaac_sim
+        export CARB_APP_PATH="$$ISAAC_SIM/kit" ISAAC_PATH="$$ISAAC_SIM" EXP_PATH="$$ISAAC_SIM/apps"
+        source "$$ISAAC_SIM/setup_python_env.sh"
+        export PYTHONPATH="/workspace/Sim-to-Real-SO-101-Workshop/source:/sim:$$PYTHONPATH"
+        unset DISPLAY HTTP_PROXY HTTPS_PROXY ALL_PROXY http_proxy https_proxy all_proxy
+        exec "$$ISAAC_SIM/python.sh" /sim/isaac_harness.py --ipc-directory /sim/ipc --contract-file /sim/contract.json --generation "$$GENERATION" --headless --enable_cameras --device cpu --livestream 0 --kit_args=--/app/extensions/registryEnabled=false
+    volumes:
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console:/sim
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/kit:/isaac-sim/kit/cache
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/data:/root/.local/share/ov/data
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/computecache:/root/.nv/ComputeCache
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/logs:/root/.nvidia-omniverse/logs
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/documents:/root/Documents
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/glcache:/root/.cache/nvidia/GLCache
+      - ${COLLECTION_DATA_DIR:-./data}/isaac-console/cache/ov:/root/.cache/ov
+      # Isaac 场景源码（Sim-to-Real-SO-101-Workshop/source），只读
+      - ${ISAAC_SOURCE_DIR:-./isaac/workshop-source}:/workspace/Sim-to-Real-SO-101-Workshop/source:ro

@@ -1,0 +1,16 @@
+{
+ "chest": {
+  "shoulder_pan": 2103,
+  "shoulder_lift": 1470,
+  "elbow_flex": 2566,
+  "wrist_flex": 2966,
+  "wrist_roll": 1009
+ },
+ "park": {
+  "shoulder_pan": 2103,
+  "shoulder_lift": 1879,
+  "elbow_flex": 2632,
+  "wrist_flex": 2691,
+  "wrist_roll": 1008
+ }
+}

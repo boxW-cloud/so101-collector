@@ -1,0 +1,143 @@
+Metadata-Version: 2.4
+Name: so101-local-sdk
+Version: 0.4.0a1
+Summary: Local robot SDK with collection, verified datasets, managed ACT training and model artifacts
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: numpy<3,>=2
+Provides-Extra: test
+Requires-Dist: pytest<10,>=8; extra == "test"
+Requires-Dist: build<2,>=1; extra == "test"
+Provides-Extra: seeed
+Requires-Dist: lerobot@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4 ; extra == "seeed"
+Provides-Extra: collection
+Requires-Dist: lerobot[dataset]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4 ; extra == "collection"
+Provides-Extra: training
+Requires-Dist: lerobot[training]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4 ; extra == "training"
+Provides-Extra: pi
+Requires-Dist: lerobot[dataset,pi]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4 ; extra == "pi"
+
+# LeRobot SO101 本地 SDK
+
+源码已按职责整理：[src入口](src/README.md) · [模块导航与旧路径对照](docs/source-layout.md)。公共导入和训练子进程入口保持兼容。
+
+外层集成工具也已分组：[integration入口与启动方式](integration/README.md) · [导入及容器打包兼容说明](docs/integration-layout.md)。旧预览归入legacy，测试集中到tests。
+
+采集上传容器已交付（当前为服务层＋仿真接入）：[ROS2 Topic接口、构建与测试步骤](tools/collection-upload-container/README.md)。Spark正式镜像`so101-collection-upload:20260923-a6`；挂载上传、失败重试、幂等与重启验收通过。用户选择稍后把两臂与相机迁到Spark；真实从臂驱动接入和实机采集仍待做，不能将本容器仿真验收算作真机通过。
+
+训练／仿真 HTTP 单容器已在 Spark 部署：[验收、架构字段与代码](docs/training-simulation-container-acceptance.md) · [接口和测试命令](docs/training-simulation-container.md) · [OpenAPI](tools/training-sim-container/openapi.json)。ACT／π0.5 训练、模型加载、ROS2→Isaac推理、停止、取消及持久化重启验证通过；API为外层适配，核心SDK仍保持本地Python接口。
+
+真实主臂采集API已验收：[COL05条款、字段、代码、数据与视频](docs/leader-collection-acceptance.md)。COM16只读主臂→CollectionTask→ROS2→Isaac；2条203帧，恢复/重录/保存/导出及失联HOLD通过，第0条固定2倍时长回放通过。真实从臂与原速性能仍待验。
+
+此前基础仿真闭环已验收：[ROS2＋ACT/pi05＋采集/回放＋WebRTC/停止报告](docs/simulation-completion-acceptance.md) · [ROS2字段和代码入口](docs/simulation-ros2-interface.md)。该批自动仿真数据回放为固定5倍时长；RTC、末端位姿规划及平台权限另列。
+
+两块训练按本地SDK范围已验收：[全部新旧代码地图](docs/training-complete-code-map.md)；[π0.5真实训练/恢复/加载报告](docs/pi05-training-acceptance.md)。A06本地并行已通过，平台双账号与可选DDP独立列项；短训练不等于任务质量或机器人执行通过。
+
+ACT GPU＋单卡共享数据并行已在Spark验收：[结果、路径与限制](docs/act-gpu-parallel-acceptance.md)。π0.5、真实DDP与平台多用户权限仍待；保留原CPU镜像。
+
+新增 DS08/DS09：[上传进度、断点续传与迁移追溯](docs/dataset-delivery.md)；[离线示例](examples/migrate_upload.py)。真实云服务接入另行验收。
+
+第17.1章独立包装：[7个元动作及接入说明](docs/action-primitives-wrapper.md) · [单文件实现](integration/action_primitives.py) · [无设备调用示例](examples/action_primitives_demo.py)。用户后续提供接口；当前只验收参数、路由和调用顺序，不代表真机/Isaac/ROS2执行已接通。
+
+已实现公共契约与仿真用`RobotSession`，新增逐条采集`CollectionTask`与完整数据导出`DatasetManager`。源码在独立目录，核心只依赖NumPy；没有Web服务、MCP、平台账号、Docker或GR00T服务依赖。
+
+本阶段不提供真机写入适配器。`kind!='simulation'`的backend在构造时拒绝；Isaac验收程序另阻止任何串口打开。不要将仿真测试参数或synthetic calibration hash用于真机。
+
+## 安装和独立运行
+
+Python3.12+，从本目录安装：
+
+```bash
+python -m pip install -e '.[test]'
+python examples/local_simulation.py
+python -m pytest -q
+```
+
+`examples/local_simulation.py`使用明确标识的FakeRobot。真实Isaac物理验收入口是`examples/isaac_acceptance.py`，连接同一Spark主机上的独立仿真测试进程；二者证据分别记录，不混称。
+
+wheel位于`dist/so101_local_sdk-0.4.0a1-py3-none-any.whl`。发布名是本地构建暂用名，没有上传公共包仓库。
+
+## 最小API
+
+```python
+from lerobot_sdk import RobotSession, JointTarget
+from lerobot_sdk.testing import FakeRobot, simulation_config
+
+config = simulation_config()  # 仅供测试，不是真机标定/安全配置
+with RobotSession(config, backend=FakeRobot()) as robot:
+    observation = robot.get_observation('Move the simulated arm')
+    positions = dict(observation.arm.positions)
+    positions['shoulder_pan.pos'] += 4
+    handle = robot.move_to(
+        JointTarget(positions, config.units, config.calibration_hash),
+        duration_s=0.5,
+    )
+    result = handle.wait(timeout_s=3)
+    print(dict(result.final_state.positions))  # 实测反馈，不是目标副本
+    robot.stop()
+```
+
+`move_to`返回`ActionHandle`，具备status/wait/cancel；wait超时抛`WaitTimeout`且不会取消。配置的业务deadline到达才失败并保持。`open_gripper`、`close_gripper`和`release`返回同类句柄。release使用绑定在该RobotConfig/calibration hash下的姿态，并保留当前夹爪位置。
+
+`get_arm_data`只查询后台采样快照；`get_observation(task)`返回状态、图像、task。状态快照、图像与动作块内容经过防御性复制；数组由不可变bytes承载，不能通过setflags(write=True)修改。
+
+## 控制和停止
+
+- 一个后台I/O线程拥有backend全部调用，本机文件锁防止同资源被另一session/进程占用。
+- 同时只允许一个manual/collection/inference控制所有者，冲突抛BusyError。
+- servo仅接受内部推理上下文，携带nonce、epoch和deadline；普通公共调用不能直接使用servo。`_control_scope`是供下一阶段Runner/CollectionTask使用的内部接缝，不是对不可信Python代码的权限沙箱。
+- 目标先校验名字、单位、hash、限位，再执行速度、单步变化及插值约束。完成判断使用实测误差和连续稳定帧。
+- stop先使旧代次失效，再由唯一I/O线程确认HOLD；不会断扭矩或开爪。迟到servo与旧句柄cancel不能控制后续操作。
+- 软件emergency_stop在仿真中锁存E_STOP；它不代表真实独立硬件急停已实现。重新连接/复位策略不能直接用于真实设备。
+- close先停止，再调用backend.close(hold=True)。后端未确认close时抛OperationFailed并保留资源锁，可显式再次close重试；不会虚报释放成功。
+- backend必须遵守timeout_s。Python线程不能强行终止任意卡死的外部驱动，本阶段不承诺物理急停时延；超时不能确认HOLD时会报错而非返回成功。
+
+事件使用`robot.events.subscribe()`获取有界拉取队列，慢消费者丢旧事件并累加dropped，不在I/O线程调用用户回调。取消订阅使用`unsubscribe()`。
+
+## 仿真与Seeed依赖边界
+
+Isaac harness通过导入既有Workshop/IsaacLab包构造环境并调用`env.step`；没有复制其驱动或模型算法。`testing/file_sim.py`是同主机、共享单调时钟的文件IPC测试夹具，不是生产远程协议，不写入核心公共字段。
+
+此阶段没有实例化或调用Seeed真机driver，不能声称已完成真机适配。`seeed`可选依赖明确固定到架构书提交：
+
+```text
+lerobot @ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4
+```
+
+后续需要Seeed API时必须从安装的包import。不能把课程容器的LeRobot0.4.x当作这份0.6.2依赖，也不能通过升级课程容器来满足新SDK。
+
+## 文档与证据
+
+- [架构章节与字段覆盖](docs/architecture-coverage.md)
+- [API与字段约束](docs/field-contracts.md)
+- [验收结果及复现步骤](docs/validation.md)
+- `artifacts/windows-tests.xml`、`artifacts/linux-tests-result.json`、`artifacts/isaac-acceptance.json`
+
+采集和本地数据集能力见下面阶段2说明；ACT训练与模型制品管理见阶段3；PolicySession和InferenceRunner的软件实现见阶段4，真机验收仍有阻塞。ActionChunk当前只有类型/字段验证，不包含完整分块队列消费。摄像头物理同步、实体急停、真机承重/扭矩/电压验证仍未执行。
+
+## 当前架构图与 Git 基线
+
+[完整架构完成图](docs/architecture/10-architecture-completion.png) · [可缩放SVG](docs/architecture/10-architecture-completion.svg) · [Git基线说明](docs/git-baseline.md)。基线标签：`baseline/stage1-20260920`。
+
+## 阶段2：逐条采集与完整导出
+
+见 [CollectionTask / DatasetManager 使用及架构核对](docs/collection-datasets.md) 和 [阶段2验收](docs/stage2-validation.md)。安装 `.[collection,test]` 后运行 `python examples/collect_dataset.py --root ./demo-data --episodes 10`。直接import固定Seeed包的数据writer/编码器/reader；设备验证使用FakeRobot＋ScriptedLeader，未声称本轮已完成人工真机或Isaac采集。
+
+阶段1基线标签未移动，本次在 `codex/collection-datasets` 开发。阶段1的架构图和验收报告保留为历史基线，本次增量以阶段2文档为准。
+
+## 阶段3：ACT训练、完整恢复与模型加载
+
+[使用说明](docs/training-models.md) · [架构条款覆盖](docs/stage3-architecture-coverage.md) · [验收报告](docs/stage3-validation.md)。安装 `.[training,test]` 后运行 `examples/train_act.py`，完成ACT短训练、独立attempt恢复、模型部署与加载。此阶段不提供机器人推理Runner，也不代表模型已经学会任务。
+
+## 阶段4：策略会话与连续推理
+
+[PolicySession / InferenceRunner 使用说明](docs/policy-runner.md) · [架构条款覆盖](docs/stage4-architecture-coverage.md) · [验证结果与阻塞](docs/stage4-validation.md)。ACT真实权重与模拟设备闭环已跑通；π0.5原生数值检查、完整文本/六轴部署和真机运动验收分别记录，不能混同。旧Git基线不变，工作分支为 `codex/policy-runner`。
+
+
+训练侧增补（2026-09-22）：[ACT策略预检与固定环境](docs/training-readiness.md) · [架构条款/字段对照](docs/training-readiness-architecture-coverage.md) · [训练镜像使用](tools/training-image/README.md)。提供33项相关测试及真实容器ACT恢复证据；不代表π0.5/GPU/DDP已验收。
+
+
+最新仿真采集复核：[回放与复现补正验收](docs/sim-collection-reacceptance.md)（10条408帧；固定5倍、无插值回放通过；原速时序未通过；100项测试通过）。
+
+
+2026-09-22：[修正后Isaac数据ACT训练→实际仿真连续推理与停止通过](docs/act-isaac-acceptance.md)。408帧、50步ACT、40个模型目标；显式停止和过期/迟到保护验证，不代表任务抓取成功。

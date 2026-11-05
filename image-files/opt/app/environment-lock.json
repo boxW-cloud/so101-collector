@@ -1,0 +1,607 @@
+{
+  "schema": "so101.training-environment.v1",
+  "python": "3.12.3",
+  "implementation": "CPython",
+  "system": "Linux",
+  "machine": "aarch64",
+  "packages": {
+    "rosgraph-msgs": {
+      "version": "2.0.4"
+    },
+    "builtin-interfaces": {
+      "version": "2.0.4"
+    },
+    "lifecycle-msgs": {
+      "version": "2.0.4"
+    },
+    "actionlib-msgs": {
+      "version": "5.3.8"
+    },
+    "rcl-interfaces": {
+      "version": "2.0.4"
+    },
+    "rosidl-typesupport-introspection-cpp": {
+      "version": "4.6.9"
+    },
+    "ament-lint-cmake": {
+      "version": "0.17.5"
+    },
+    "ament-copyright": {
+      "version": "0.17.5"
+    },
+    "rosidl-typesupport-fastrtps-cpp": {
+      "version": "3.6.4"
+    },
+    "rmw-dds-common": {
+      "version": "3.1.1"
+    },
+    "ros2cli": {
+      "version": "0.32.12"
+    },
+    "rosidl-adapter": {
+      "version": "4.6.9"
+    },
+    "ament-package": {
+      "version": "0.16.5"
+    },
+    "composition-interfaces": {
+      "version": "2.0.4"
+    },
+    "ros2lifecycle": {
+      "version": "0.32.12"
+    },
+    "launch-ros": {
+      "version": "0.26.12"
+    },
+    "statistics-msgs": {
+      "version": "2.0.4"
+    },
+    "rpyutils": {
+      "version": "0.4.2"
+    },
+    "ros2plugin": {
+      "version": "5.4.6"
+    },
+    "launch-yaml": {
+      "version": "3.4.11"
+    },
+    "rosidl-typesupport-fastrtps-c": {
+      "version": "3.6.4"
+    },
+    "launch": {
+      "version": "3.4.11"
+    },
+    "rosidl-typesupport-introspection-c": {
+      "version": "4.6.9"
+    },
+    "diagnostic-msgs": {
+      "version": "5.3.8"
+    },
+    "ament-flake8": {
+      "version": "0.17.5"
+    },
+    "ros2topic": {
+      "version": "0.32.12"
+    },
+    "ros2action": {
+      "version": "0.32.12"
+    },
+    "rosidl-generator-type-description": {
+      "version": "4.6.9"
+    },
+    "ros2interface": {
+      "version": "0.32.12"
+    },
+    "ros2run": {
+      "version": "0.32.12"
+    },
+    "rosidl-generator-cpp": {
+      "version": "4.6.9"
+    },
+    "ament-index-python": {
+      "version": "1.8.4"
+    },
+    "rosidl-runtime-py": {
+      "version": "0.13.2"
+    },
+    "ament-uncrustify": {
+      "version": "0.17.5"
+    },
+    "ros2component": {
+      "version": "0.32.12"
+    },
+    "rosidl-cli": {
+      "version": "4.6.9"
+    },
+    "geometry-msgs": {
+      "version": "5.3.8"
+    },
+    "action-msgs": {
+      "version": "2.0.4"
+    },
+    "domain-coordinator": {
+      "version": "0.12.1"
+    },
+    "launch-testing-ros": {
+      "version": "0.26.12"
+    },
+    "launch-testing": {
+      "version": "3.4.11"
+    },
+    "ros2launch": {
+      "version": "0.26.12"
+    },
+    "type-description-interfaces": {
+      "version": "2.0.4"
+    },
+    "rosidl-pycommon": {
+      "version": "4.6.9"
+    },
+    "ament-cpplint": {
+      "version": "0.17.5"
+    },
+    "rosidl-cmake": {
+      "version": "4.6.9"
+    },
+    "rosidl-typesupport-c": {
+      "version": "3.2.3"
+    },
+    "rosidl-parser": {
+      "version": "4.6.9"
+    },
+    "rosidl-typesupport-cpp": {
+      "version": "3.2.3"
+    },
+    "ros2node": {
+      "version": "0.32.12"
+    },
+    "ament-lint": {
+      "version": "0.17.5"
+    },
+    "ament-xmllint": {
+      "version": "0.17.5"
+    },
+    "ros2multicast": {
+      "version": "0.32.12"
+    },
+    "shape-msgs": {
+      "version": "5.3.8"
+    },
+    "nav-msgs": {
+      "version": "5.3.8"
+    },
+    "rosidl-generator-c": {
+      "version": "4.6.9"
+    },
+    "rclpy": {
+      "version": "7.1.12"
+    },
+    "ament-pep257": {
+      "version": "0.17.5"
+    },
+    "ros2doctor": {
+      "version": "0.32.12"
+    },
+    "rosidl-generator-rs": {
+      "version": "0.5.0"
+    },
+    "ros2pkg": {
+      "version": "0.32.12"
+    },
+    "visualization-msgs": {
+      "version": "5.3.8"
+    },
+    "ament-cmake-test": {
+      "version": "2.5.6"
+    },
+    "ros2service": {
+      "version": "0.32.12"
+    },
+    "rcutils": {
+      "version": "6.7.6"
+    },
+    "launch-xml": {
+      "version": "3.4.11"
+    },
+    "unique-identifier-msgs": {
+      "version": "2.5.1"
+    },
+    "osrf-pycommon": {
+      "version": "2.1.7"
+    },
+    "sensor-msgs": {
+      "version": "5.3.8"
+    },
+    "ament-cppcheck": {
+      "version": "0.17.5"
+    },
+    "trajectory-msgs": {
+      "version": "5.3.8"
+    },
+    "stereo-msgs": {
+      "version": "5.3.8"
+    },
+    "ros2param": {
+      "version": "0.32.12"
+    },
+    "std-srvs": {
+      "version": "5.3.8"
+    },
+    "service-msgs": {
+      "version": "2.0.4"
+    },
+    "sros2": {
+      "version": "0.13.6"
+    },
+    "std-msgs": {
+      "version": "5.3.8"
+    },
+    "rosidl-generator-py": {
+      "version": "0.22.2"
+    },
+    "ros2bag-sqlite3-cli": {
+      "version": "0.26.11"
+    },
+    "ros2bag": {
+      "version": "0.26.11"
+    },
+    "ros2bag-mcap-cli": {
+      "version": "0.26.11"
+    },
+    "tf2-py": {
+      "version": "0.36.22"
+    },
+    "tf2-ros-py": {
+      "version": "0.36.22"
+    },
+    "sensor-msgs-py": {
+      "version": "5.3.8"
+    },
+    "tf2-kdl": {
+      "version": "0.36.22"
+    },
+    "rosbag2-py": {
+      "version": "0.26.11"
+    },
+    "rosbag2-interfaces": {
+      "version": "0.26.11"
+    },
+    "tf2-msgs": {
+      "version": "0.36.22"
+    },
+    "tf2-sensor-msgs": {
+      "version": "0.36.22"
+    },
+    "message-filters": {
+      "version": "4.11.17"
+    },
+    "tf2-tools": {
+      "version": "0.36.22"
+    },
+    "tf2-geometry-msgs": {
+      "version": "0.36.22"
+    },
+    "pip": {
+      "version": "24.0"
+    },
+    "so101-local-sdk": {
+      "version": "0.4.0a1"
+    },
+    "six": {
+      "version": "1.17.0"
+    },
+    "pyyaml": {
+      "version": "6.0.3"
+    },
+    "lark": {
+      "version": "1.2.2"
+    },
+    "iniconfig": {
+      "version": "2.3.0"
+    },
+    "python-dateutil": {
+      "version": "2.9.0.post0"
+    },
+    "pygments": {
+      "version": "2.19.2"
+    },
+    "cffi": {
+      "version": "2.0.0"
+    },
+    "psutil": {
+      "version": "7.0.0"
+    },
+    "regex": {
+      "version": "2026.9.10"
+    },
+    "pytest": {
+      "version": "8.4.2"
+    },
+    "pydantic": {
+      "version": "2.13.5"
+    },
+    "jsonlines": {
+      "version": "4.0.0"
+    },
+    "hf-xet": {
+      "version": "1.6.0"
+    },
+    "pyopenssl": {
+      "version": "26.4.0"
+    },
+    "aioice": {
+      "version": "0.10.2"
+    },
+    "numpy": {
+      "version": "2.2.6"
+    },
+    "huggingface-hub": {
+      "version": "1.33.0"
+    },
+    "aiohttp": {
+      "version": "3.13.3"
+    },
+    "google-crc32c": {
+      "version": "1.9.0"
+    },
+    "smmap": {
+      "version": "5.0.3"
+    },
+    "pandas": {
+      "version": "2.3.3"
+    },
+    "annotated-doc": {
+      "version": "0.0.5"
+    },
+    "certifi": {
+      "version": "2026.7.22"
+    },
+    "idna": {
+      "version": "3.20"
+    },
+    "draccus": {
+      "version": "0.11.6"
+    },
+    "mdurl": {
+      "version": "0.1.2"
+    },
+    "lerobot": {
+      "version": "0.6.2",
+      "vcs_url": "https://github.com/Seeed-Projects/lerobot.git",
+      "vcs_info": {
+        "commit_id": "4aaff99be4a1d81568c08c8f0296b41b40c99ec4",
+        "requested_revision": "4aaff99be4a1d81568c08c8f0296b41b40c99ec4",
+        "vcs": "git"
+      }
+    },
+    "datasets": {
+      "version": "4.8.5"
+    },
+    "requests": {
+      "version": "2.34.2"
+    },
+    "sentry-sdk": {
+      "version": "2.70.0"
+    },
+    "farama-notifications": {
+      "version": "0.0.6"
+    },
+    "packaging": {
+      "version": "25.0"
+    },
+    "propcache": {
+      "version": "0.5.4"
+    },
+    "typer": {
+      "version": "0.27.2"
+    },
+    "annotated-types": {
+      "version": "0.8.0"
+    },
+    "frozenlist": {
+      "version": "1.8.0"
+    },
+    "xxhash": {
+      "version": "4.0.1"
+    },
+    "markdown-it-py": {
+      "version": "4.2.0"
+    },
+    "tzdata": {
+      "version": "2026.4"
+    },
+    "pyee": {
+      "version": "14.0.0"
+    },
+    "fsspec": {
+      "version": "2026.2.0"
+    },
+    "wandb": {
+      "version": "0.27.2"
+    },
+    "pytz": {
+      "version": "2026.4"
+    },
+    "tokenizers": {
+      "version": "0.22.2"
+    },
+    "protobuf": {
+      "version": "7.36.2"
+    },
+    "h11": {
+      "version": "0.16.0"
+    },
+    "aiohappyeyeballs": {
+      "version": "2.7.1"
+    },
+    "torchcodec": {
+      "version": "0.11.1"
+    },
+    "httpcore": {
+      "version": "1.0.9"
+    },
+    "shellingham": {
+      "version": "1.5.4"
+    },
+    "aiortc": {
+      "version": "1.14.0"
+    },
+    "av": {
+      "version": "15.1.0"
+    },
+    "cmake": {
+      "version": "4.1.3"
+    },
+    "platformdirs": {
+      "version": "4.12.1"
+    },
+    "toml": {
+      "version": "0.10.2"
+    },
+    "httpx": {
+      "version": "0.28.1"
+    },
+    "pydantic-core": {
+      "version": "2.46.5"
+    },
+    "pycparser": {
+      "version": "3.0"
+    },
+    "mypy-extensions": {
+      "version": "1.1.0"
+    },
+    "multidict": {
+      "version": "6.9.1"
+    },
+    "attrs": {
+      "version": "26.1.0"
+    },
+    "pyarrow": {
+      "version": "25.0.1"
+    },
+    "charset-normalizer": {
+      "version": "3.5.1"
+    },
+    "rich": {
+      "version": "15.0.0"
+    },
+    "cloudpickle": {
+      "version": "3.1.2"
+    },
+    "transformers": {
+      "version": "5.5.4"
+    },
+    "typing-inspection": {
+      "version": "0.4.4"
+    },
+    "multiprocess": {
+      "version": "0.70.19"
+    },
+    "opencv-python-headless": {
+      "version": "4.13.0.92"
+    },
+    "setuptools": {
+      "version": "81.0.0"
+    },
+    "einops": {
+      "version": "0.8.2"
+    },
+    "accelerate": {
+      "version": "1.15.0"
+    },
+    "yarl": {
+      "version": "1.25.1"
+    },
+    "pylibsrtp": {
+      "version": "1.0.0"
+    },
+    "click": {
+      "version": "8.5.0"
+    },
+    "urllib3": {
+      "version": "2.8.0"
+    },
+    "ifaddr": {
+      "version": "0.2.0"
+    },
+    "typing-inspect": {
+      "version": "0.9.0"
+    },
+    "gymnasium": {
+      "version": "1.3.0"
+    },
+    "gitdb": {
+      "version": "4.0.12"
+    },
+    "cryptography": {
+      "version": "50.0.1"
+    },
+    "aiosignal": {
+      "version": "1.4.0"
+    },
+    "anyio": {
+      "version": "4.15.1"
+    },
+    "pluggy": {
+      "version": "1.6.0"
+    },
+    "dnspython": {
+      "version": "2.8.0"
+    },
+    "mergedeep": {
+      "version": "1.3.4"
+    },
+    "tqdm": {
+      "version": "4.70.1"
+    },
+    "termcolor": {
+      "version": "3.3.0"
+    },
+    "scipy": {
+      "version": "1.18.1"
+    },
+    "gitpython": {
+      "version": "3.1.62"
+    },
+    "dill": {
+      "version": "0.4.1"
+    },
+    "safetensors": {
+      "version": "0.8.0"
+    },
+    "typing-extensions": {
+      "version": "4.16.0"
+    },
+    "sympy": {
+      "version": "1.14.0"
+    },
+    "networkx": {
+      "version": "3.6.1"
+    },
+    "torchvision": {
+      "version": "0.25.0+cpu"
+    },
+    "markupsafe": {
+      "version": "3.0.3"
+    },
+    "pillow": {
+      "version": "12.3.0"
+    },
+    "filelock": {
+      "version": "3.32.3"
+    },
+    "jinja2": {
+      "version": "3.1.6"
+    },
+    "mpmath": {
+      "version": "1.3.0"
+    },
+    "torch": {
+      "version": "2.10.0+cpu"
+    }
+  },
+  "torch_cuda_build": null,
+  "sdk_source_hash": "sha256:c57d164493fdfe01ab72443656b961f278231e60ef7aa8cec1acc3b2ae164d9c",
+  "lerobot_source_hash": "sha256:d2bf98233096e0c27ffced8ac1d75f57f18baaed6901a83b69c297cb9193b422",
+  "content_hash": "sha256:9946b4371f87dcb3147ca6fda1083d8dde904af24526ca4e8e26f946e04bcb1b"
+}

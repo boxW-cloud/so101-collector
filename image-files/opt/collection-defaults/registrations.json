@@ -1,0 +1,201 @@
+[
+  {
+    "kind": "robots",
+    "id": "so101-isaac-console",
+    "revision": "isaac-20261007-wifi-v1",
+    "project": "lab",
+    "owner": "operator",
+    "body": {
+      "calibration_revision": "baseline",
+      "camera_shapes": {
+        "front": [
+          480,
+          640,
+          3
+        ],
+        "wrist": [
+          480,
+          640,
+          3
+        ]
+      },
+      "capabilities": [
+        "collection",
+        "teleop",
+        "reset"
+      ],
+      "kind": "simulation",
+      "leader_input_profile": {
+        "revision": "wifi-2s-20261007",
+        "scope": "simulation_wifi",
+        "ttl_s": 2
+      },
+      "leader_profile_hash": "sha256:d2c3945328cb4dcd4f0e0c99b6b54a8eb8f28e24e594028fa7482254c4d9b82a",
+      "provenance": "isaac",
+      "robot_id": "so101-isaac-console",
+      "ros": {
+        "camera_topics": {
+          "front": {
+            "name": "/so101_isaac_console/cameras/front",
+            "qos": {
+              "depth": 16,
+              "durability": "volatile",
+              "history": "keep_last",
+              "reliability": "reliable"
+            },
+            "type": "sensor_msgs/msg/CompressedImage"
+          },
+          "wrist": {
+            "name": "/so101_isaac_console/cameras/wrist",
+            "qos": {
+              "depth": 16,
+              "durability": "volatile",
+              "history": "keep_last",
+              "reliability": "reliable"
+            },
+            "type": "sensor_msgs/msg/CompressedImage"
+          }
+        },
+        "clock_domain": "same_host_monotonic",
+        "clock_topic": {
+          "name": "/so101_isaac_console/clock",
+          "qos": {
+            "depth": 16,
+            "durability": "volatile",
+            "history": "keep_last",
+            "reliability": "reliable"
+          },
+          "type": "rosgraph_msgs/msg/Clock"
+        },
+        "command_topic": {
+          "name": "/so101_isaac_console/command",
+          "qos": {
+            "depth": 16,
+            "durability": "volatile",
+            "history": "keep_last",
+            "reliability": "reliable"
+          },
+          "type": "std_msgs/msg/String"
+        },
+        "contract_version": "so101.delivery.ros.v1",
+        "dds_config_sha256": "sha256:61387654cd018289afa27519a92fcf40700d8c370182676fd2013d286ed5336a",
+        "dds_config_uri": "file:///data/isaac-console/fastdds.xml",
+        "domain_id": 173,
+        "key_file": "/shared/ros-key",
+        "namespace": "/so101_isaac_console",
+        "observation_topic": {
+          "name": "/so101_isaac_console/observation",
+          "qos": {
+            "depth": 16,
+            "durability": "volatile",
+            "history": "keep_last",
+            "reliability": "reliable"
+          },
+          "type": "std_msgs/msg/String"
+        },
+        "result_topic": {
+          "name": "/so101_isaac_console/result",
+          "qos": {
+            "depth": 16,
+            "durability": "volatile",
+            "history": "keep_last",
+            "reliability": "reliable"
+          },
+          "type": "std_msgs/msg/String"
+        },
+        "rmw_implementation": "rmw_fastrtps_cpp",
+        "state_topic": {
+          "name": "/so101_isaac_console/state",
+          "qos": {
+            "depth": 16,
+            "durability": "volatile",
+            "history": "keep_last",
+            "reliability": "reliable"
+          },
+          "type": "sensor_msgs/msg/JointState"
+        },
+        "state_topic_units": "rad"
+      },
+      "scene_id": "Lerobot-So101-Teleop-Vials-To-Rack-Eval",
+      "scene_revision": "workshop-locked-20260923",
+      "sdk_config": {
+        "action_timeout_s": 45,
+        "calibration_hash": "sha256:d62adbbf46c050a734a55a60aea1bc17d0f6d365327555db5f3b00d8bda4f2e2",
+        "close_policy": "hold",
+        "event_capacity": 64,
+        "fps": 5,
+        "gripper_closed": 20.0,
+        "gripper_open": 80.0,
+        "io_timeout_s": 5,
+        "limits": {
+          "elbow_flex.pos": [
+            -100.0,
+            90.0
+          ],
+          "gripper.pos": [
+            0.0,
+            100.0
+          ],
+          "shoulder_lift.pos": [
+            -100.0,
+            100.0
+          ],
+          "shoulder_pan.pos": [
+            -110.0,
+            110.0
+          ],
+          "wrist_flex.pos": [
+            -95.0,
+            95.0
+          ],
+          "wrist_roll.pos": [
+            -160.0,
+            160.0
+          ]
+        },
+        "max_observation_age_s": 1.0,
+        "max_sensor_skew_s": 0.5,
+        "max_step": {
+          "elbow_flex.pos": 3.0,
+          "gripper.pos": 3.0,
+          "shoulder_lift.pos": 3.0,
+          "shoulder_pan.pos": 3.0,
+          "wrist_flex.pos": 3.0,
+          "wrist_roll.pos": 3.0
+        },
+        "max_velocity": {
+          "elbow_flex.pos": 30.0,
+          "gripper.pos": 30.0,
+          "shoulder_lift.pos": 30.0,
+          "shoulder_pan.pos": 30.0,
+          "wrist_flex.pos": 30.0,
+          "wrist_roll.pos": 30.0
+        },
+        "release_pose": null,
+        "required_cameras": [
+          "front",
+          "wrist"
+        ],
+        "robot_id": "so101-isaac-console",
+        "stable_frames": 2,
+        "tolerance": {
+          "elbow_flex.pos": 0.75,
+          "gripper.pos": 0.75,
+          "shoulder_lift.pos": 0.75,
+          "shoulder_pan.pos": 0.75,
+          "wrist_flex.pos": 0.75,
+          "wrist_roll.pos": 0.75
+        },
+        "units": {
+          "elbow_flex.pos": "deg",
+          "gripper.pos": "normalized_0_100",
+          "shoulder_lift.pos": "deg",
+          "shoulder_pan.pos": "deg",
+          "wrist_flex.pos": "deg",
+          "wrist_roll.pos": "deg"
+        }
+      },
+      "simulation_numerical_budget_deg": 0.001
+    }
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "lab": {
+    "default_mode": "simulation_teleop",
+    "simulation_teleop": {
+      "robot_id": "so101-isaac-console",
+      "robot_revision": "isaac-20261007-wifi-v1"
+    }
+  }
+}

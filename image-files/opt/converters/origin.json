@@ -1,0 +1,6 @@
+{
+  "url": "https://raw.githubusercontent.com/NVIDIA/Isaac-GR00T/51d4c89f72fda44cbf77285c6a8114b52676b8a1/scripts/lerobot_conversion/convert_v3_to_v2.py",
+  "commit": "51d4c89f72fda44cbf77285c6a8114b52676b8a1",
+  "sha256": "94bc600b613be43133aabcddde64ca3188048a09cd84e293afe4d5a79614e24c",
+  "license": "Apache-2.0"
+}

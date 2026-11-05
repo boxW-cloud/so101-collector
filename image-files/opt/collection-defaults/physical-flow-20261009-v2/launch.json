@@ -1,0 +1,1 @@
+{"schema": "so101.physical-flow.launch.v1", "domain_id": 174, "namespace": "/so101_physical_collection", "robot_id": "so101-physical-windows", "robot_revision": "physical-one-to-one-20261009-v5", "peer_config": "/data/physical-flow-20261009-v2/peer.json", "console_config": "/data/physical-flow-20261009-v2/console.json", "log_directory": "/data/physical-flow-20261009-v2/logs"}

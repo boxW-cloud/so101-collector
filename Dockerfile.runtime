@@ -1,0 +1,16 @@
+ARG BASE_IMAGE=so101-collection-runtime:20261015-v10r4
+FROM ${BASE_IMAGE}
+USER root
+# Use the signed Ubuntu repositories already supplied by the base image.
+# Restrict update to that file so unrelated ROS repositories cannot block this
+# dependency-only build. No host packages or SSH server are modified.
+RUN mkdir -p /tmp /run /var/cache/apt/archives/partial /var/log/apt \
+ && chmod 1777 /tmp \
+ && apt-get -o Acquire::Retries=1 -o Acquire::http::Timeout=30 \
+      -o Dir::Etc::sourcelist=/etc/apt/sources.list.d/ubuntu.sources \
+      -o Dir::Etc::sourceparts=- update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends rsync openssh-client \
+ && dpkg-query -W rsync openssh-client > /opt/collection-rsync-packages.txt \
+ && /usr/bin/rsync --version > /opt/collection-rsync-version.txt \
+ && /usr/bin/ssh -V 2> /opt/collection-ssh-version.txt \
+ && rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*.deb

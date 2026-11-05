@@ -1,0 +1,233 @@
+{
+  "robot_id": "so101-physical-windows",
+  "kind": "physical",
+  "provenance": "physical_native_relative_teleop",
+  "commissioned": true,
+  "capabilities": [
+    "calibration",
+    "collection",
+    "teleop"
+  ],
+  "sdk_config": {
+    "robot_id": "so101-physical-windows",
+    "calibration_hash": "sha256:157b8cd0ee72a61c358c454d0e14e12c4be6677ee638d11f1bacb7c1c41e5b5c",
+    "units": {
+      "shoulder_pan.pos": "deg",
+      "shoulder_lift.pos": "deg",
+      "elbow_flex.pos": "deg",
+      "wrist_flex.pos": "deg",
+      "wrist_roll.pos": "deg",
+      "gripper.pos": "normalized_0_100"
+    },
+    "limits": {
+      "shoulder_pan.pos": [
+        -109.99987525598623,
+        109.99987525598623
+      ],
+      "shoulder_lift.pos": [
+        -100.00004285756798,
+        100.00004285756798
+      ],
+      "elbow_flex.pos": [
+        -95.16483516483517,
+        95.16483516483517
+      ],
+      "wrist_flex.pos": [
+        -94.99984017946129,
+        94.99984017946129
+      ],
+      "wrist_roll.pos": [
+        -157.21102461697095,
+        162.78934171036462
+      ],
+      "gripper.pos": [
+        0.0,
+        100.0
+      ]
+    },
+    "max_velocity": {
+      "shoulder_pan.pos": 10.0,
+      "shoulder_lift.pos": 10.0,
+      "elbow_flex.pos": 10.0,
+      "wrist_flex.pos": 10.0,
+      "wrist_roll.pos": 10.0,
+      "gripper.pos": 20.0
+    },
+    "max_step": {
+      "shoulder_pan.pos": 2.0,
+      "shoulder_lift.pos": 2.0,
+      "elbow_flex.pos": 2.0,
+      "wrist_flex.pos": 2.0,
+      "wrist_roll.pos": 2.0,
+      "gripper.pos": 4.0
+    },
+    "tolerance": {
+      "shoulder_pan.pos": 3.0,
+      "shoulder_lift.pos": 3.0,
+      "elbow_flex.pos": 3.0,
+      "wrist_flex.pos": 3.0,
+      "wrist_roll.pos": 3.0,
+      "gripper.pos": 3.0
+    },
+    "gripper_open": 80.0,
+    "gripper_closed": 20.0,
+    "release_pose": null,
+    "fps": 5,
+    "stable_frames": 2,
+    "action_timeout_s": 30,
+    "io_timeout_s": 10,
+    "max_observation_age_s": 2.5,
+    "max_sensor_skew_s": 0.5,
+    "required_cameras": [
+      "wrist"
+    ],
+    "event_capacity": 64
+  },
+  "camera_shapes": {
+    "wrist": [
+      480,
+      640,
+      3
+    ]
+  },
+  "calibration_revision": "native-relative-subset-20261008-v3",
+  "physical_mapping": {
+    "schema": "so101.native_relative_teleop.v1",
+    "scope": "relative_encoder_bench",
+    "signs": {
+      "shoulder_pan": -1,
+      "shoulder_lift": -1,
+      "elbow_flex": -1,
+      "wrist_flex": -1,
+      "wrist_roll": -1,
+      "gripper": -1
+    },
+    "directions_verified": {
+      "shoulder_pan": false,
+      "shoulder_lift": true,
+      "elbow_flex": true,
+      "wrist_flex": true,
+      "wrist_roll": false,
+      "gripper": false
+    },
+    "max_anchor_delta_deg": 15,
+    "max_anchor_gripper_ticks": 100,
+    "active_axes": [
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex"
+    ],
+    "gains": {
+      "shoulder_pan": 0.15,
+      "shoulder_lift": 0.15,
+      "elbow_flex": 0.15,
+      "wrist_flex": 0.15,
+      "wrist_roll": 0.15,
+      "gripper": 0.15
+    }
+  },
+  "absolute_zero_verified": false,
+  "tcp_calibrated": false,
+  "device_config_revision": "observed-readonly-dfc0788d7319",
+  "ros": {
+    "domain_id": 174,
+    "namespace": "/so101_physical_collection",
+    "key_file": "/data/physical-collection/ros-key",
+    "command_topic": {
+      "name": "/so101_physical_collection/command",
+      "type": "std_msgs/msg/String",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    },
+    "result_topic": {
+      "name": "/so101_physical_collection/result",
+      "type": "std_msgs/msg/String",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    },
+    "state_topic": {
+      "name": "/so101_physical_collection/state",
+      "type": "sensor_msgs/msg/JointState",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    },
+    "observation_topic": {
+      "name": "/so101_physical_collection/observation",
+      "type": "std_msgs/msg/String",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    },
+    "camera_topics": {
+      "wrist": {
+        "name": "/so101_physical_collection/cameras/wrist",
+        "type": "sensor_msgs/msg/CompressedImage",
+        "qos": {
+          "reliability": "reliable",
+          "durability": "volatile",
+          "history": "keep_last",
+          "depth": 16
+        }
+      }
+    },
+    "clock_topic": {
+      "name": "/so101_physical_collection/clock",
+      "type": "rosgraph_msgs/msg/Clock",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    },
+    "rmw_implementation": "rmw_fastrtps_cpp",
+    "clock_domain": "same_host_monotonic",
+    "state_topic_units": "rad",
+    "contract_version": "so101.delivery.ros.v1"
+  },
+  "require_runtime_provenance": true,
+  "runtime_config_sha256": "sha256:a6344197d059248c31fbcd0ba7af4e9a9e99682dda0edd965a4be703b0561323",
+  "physical_collection_scope": {
+    "schema": "so101.physical_collection_scope.v1",
+    "purpose": "real teleop recording lifecycle and LeRobot export/HTTP receipt engineering validation",
+    "active_axes": [
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex"
+    ],
+    "held_axes": [
+      "shoulder_pan",
+      "wrist_roll",
+      "gripper"
+    ],
+    "measured_state_axes": [
+      "shoulder_pan",
+      "shoulder_lift",
+      "elbow_flex",
+      "wrist_flex",
+      "wrist_roll",
+      "gripper"
+    ],
+    "action_basis": "actual motor goal readback",
+    "absolute_zero_verified": false,
+    "tcp_calibrated": false,
+    "six_axis_direction_acceptance": false,
+    "task_success_acceptance": false,
+    "direction_evidence_sha256": "c08a0b3ddb003f84f5c45cb469148b99e8f79c212f6d5b6acc4cd84d9271ab90"
+  }
+}

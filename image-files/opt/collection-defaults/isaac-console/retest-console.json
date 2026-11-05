@@ -1,0 +1,31 @@
+{
+  "platform_url": "http://127.0.0.1:8910",
+  "token_file": "/shared/access-token",
+  "project": "lab",
+  "bind": "0.0.0.0",
+  "port": 8920,
+  "allowed_hosts": [
+    "192.168.100.100",
+    "127.0.0.1",
+    "localhost",
+    "192.168.0.182",
+    "192.168.0.198"
+  ],
+  "state_file": "/data/isaac-console/console.sqlite",
+  "aliases": {
+    "so101-isaac-console": "g1_1"
+  },
+  "preferred_revisions": {
+    "so101-isaac-console": "isaac-20261007-wifi-v1"
+  },
+  "physical_enabled": false,
+  "fps": 5,
+  "robot_ids": [
+    "so101-isaac-console"
+  ],
+  "trusted_previews": {
+    "so101-isaac-console@isaac-20261007-wifi-v1": "http://127.0.0.1:8922"
+  },
+  "default_mode": "simulation_teleop",
+  "dataset_scope": "project"
+}

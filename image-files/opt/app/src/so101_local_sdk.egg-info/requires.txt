@@ -1,0 +1,17 @@
+numpy<3,>=2
+
+[collection]
+lerobot[dataset]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4
+
+[pi]
+lerobot[dataset,pi]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4
+
+[seeed]
+lerobot@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4
+
+[test]
+pytest<10,>=8
+build<2,>=1
+
+[training]
+lerobot[training]@ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4

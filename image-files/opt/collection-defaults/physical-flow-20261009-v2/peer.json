@@ -1,0 +1,76 @@
+{
+  "domain_id": 174,
+  "namespace": "/so101_physical_collection",
+  "key_file": "/data/physical-collection/ros-key",
+  "command_topic": {
+    "name": "/so101_physical_collection/command",
+    "type": "std_msgs/msg/String",
+    "qos": {
+      "reliability": "reliable",
+      "durability": "volatile",
+      "history": "keep_last",
+      "depth": 16
+    }
+  },
+  "result_topic": {
+    "name": "/so101_physical_collection/result",
+    "type": "std_msgs/msg/String",
+    "qos": {
+      "reliability": "reliable",
+      "durability": "volatile",
+      "history": "keep_last",
+      "depth": 16
+    }
+  },
+  "state_topic": {
+    "name": "/so101_physical_collection/state",
+    "type": "sensor_msgs/msg/JointState",
+    "qos": {
+      "reliability": "reliable",
+      "durability": "volatile",
+      "history": "keep_last",
+      "depth": 16
+    }
+  },
+  "observation_topic": {
+    "name": "/so101_physical_collection/observation",
+    "type": "std_msgs/msg/String",
+    "qos": {
+      "reliability": "reliable",
+      "durability": "volatile",
+      "history": "keep_last",
+      "depth": 16
+    }
+  },
+  "camera_topics": {
+    "wrist": {
+      "name": "/so101_physical_collection/cameras/wrist",
+      "type": "sensor_msgs/msg/CompressedImage",
+      "qos": {
+        "reliability": "reliable",
+        "durability": "volatile",
+        "history": "keep_last",
+        "depth": 16
+      }
+    }
+  },
+  "clock_topic": {
+    "name": "/so101_physical_collection/clock",
+    "type": "rosgraph_msgs/msg/Clock",
+    "qos": {
+      "reliability": "reliable",
+      "durability": "volatile",
+      "history": "keep_last",
+      "depth": 16
+    }
+  },
+  "rmw_implementation": "rmw_fastrtps_cpp",
+  "clock_domain": "same_host_monotonic",
+  "state_topic_units": "rad",
+  "contract_version": "so101.delivery.ros.v1",
+  "bridge_url": "http://127.0.0.1:18872",
+  "gripper_angle_deg": [
+    -8.33962621566888,
+    98.33966478748003
+  ]
+}

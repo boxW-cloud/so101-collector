@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "so101-local-sdk"
+version = "0.4.0a1"
+description = "Local robot SDK with collection, verified datasets, managed ACT training and model artifacts"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2,<3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8,<10", "build>=1,<2"]
+seeed = ["lerobot @ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4"]
+collection = ["lerobot[dataset] @ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4"]
+training = ["lerobot[training] @ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4"]
+pi = ["lerobot[pi,dataset] @ git+https://github.com/Seeed-Projects/lerobot.git@4aaff99be4a1d81568c08c8f0296b41b40c99ec4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
