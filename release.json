@@ -1,11 +1,11 @@
 {
-  "release": "v10r15r1",
-  "tag": "v10r15r1",
-  "published_date": "2026-11-04",
+  "release": "v10r16",
+  "tag": "v10r16",
+  "published_date": "2026-11-05",
   "platform": "linux/arm64",
   "collection": {
-    "image": "so101-collection:20261105-v10r15r1",
-    "image_id": "sha256:915c57e21e52ac6ef6bab52f0e180e6f4d6066b9794848be8a9cfff0ce3b795a"
+    "image": "so101-collection:20261105-v10r16",
+    "image_id": "sha256:8e7bc46b7b6b63b22637fedf35c7c1b295770e8ea8e7a68518f8212906f28a82"
   },
   "runtime": {
     "image": "so101-collection-runtime:20261015-v10r6-rsync",
@@ -86,6 +86,7 @@
     "image-files/opt/app/deployment_runtime/redis_capture.py": "0bbc6f348dbb40d82fb08a386f042b02b440f742f6108f3aae38fccf565d1b60",
     "image-files/opt/app/deployment_runtime/ros_contract.py": "43fd345d1496a5d3c84cace051caaca18a46f41b6c24f871ba965ec8db87af92",
     "image-files/opt/app/deployment_runtime/ros_dispatch.py": "8697f76cf7e0dc35f015977c353002781657347dd7a004feeca702cd0e37af9f",
+    "image-files/opt/app/deployment_runtime/ros_images.py": "d272a220b1d11483c3ac664f768bf82bc5d8ffc27654cccee5d07355cef6dee2",
     "image-files/opt/app/deployment_runtime/ros_transport.py": "8fe6b4f51638f08a6607ff6068de2d3963c5619cd2bff6f858e6a97846da081d",
     "image-files/opt/app/deployment_runtime/ros_wire.py": "fa77f9b11fcc6fc376b7ef1422bf87439bc2569cf4f10995983841b629d80d69",
     "image-files/opt/app/deployment_runtime/service.py": "c631d3fe9bfc1dd1761f40d5b57e4686664a3b6218c37d8decd6f6c32db84cf9",
@@ -239,6 +240,7 @@
     "image-files/opt/app/tests/test_observation_frames.py": "374ee0063298a7daa563a01d55b292d5fb24f94e40420ae0990e388079d61391",
     "image-files/opt/app/tests/test_redis_capture.py": "44e0cb0a9bd9481c27640fd5c0cedce04f7b3e9f4fb05d9dda85629358ce4fcd",
     "image-files/opt/app/tests/test_robot_priority_stop.py": "e6c9f989472052b14705b56f1b735c48f3fead9ff9f34184a89d91ac57e87fb8",
+    "image-files/opt/app/tests/test_ros_images.py": "1f344949f2405d86031e37f936eaeb5448d812a132139f7435601a46035c4bff",
     "image-files/opt/app/vendor/feetech_servo_sdk-1.0.0.dist-info/licenses/LICENSE": "436a6d536138f203ac333858cff92a568be62797752b3adb94bcaa0f6ffe7ef6",
     "image-files/opt/app/vendor/feetech_servo_sdk-1.0.0.dist-info/METADATA": "ee6ca5ea1da56a12ad185af58a049d581fdde69a8fa510c8b04ff34ddd947e14",
     "image-files/opt/app/vendor/feetech_servo_sdk-1.0.0.dist-info/top_level.txt": "687f78ffd929cbcc77cdb40235034af2e01e27f3ed30cdabdd2dad9844a10031",
@@ -304,7 +306,7 @@
     "image-files/opt/converters/origin.json": "7df96ed16d9771fb3b76bde10b049dae974032feadb2b37d396964997efdb4cb",
     "image-files/opt/sim-retest/entrypoint.sh": "b930a0760712ea4bb08362ed67214d2b7cf7a5100bc6d8867b7480410a7023bd",
     "image-files/opt/sim-retest/initialize_defaults.py": "f340932fae7e275fd60b1258b61ec18723a6288052d44c882cfa2b13291818a3",
-    "image-files/opt/sim-retest/simulation_retest_supervisor.py": "bc02a4ced5f83a9e010a85d7cc3927de66972de95e7e7906304f5ea20a4a6ea0",
+    "image-files/opt/sim-retest/simulation_retest_supervisor.py": "a5103e30ace0c6675a91a5c424b25d6ba5cd65eb61175b8595fb3fdd9702c089",
     "image-files/opt/sim-retest/wait_for_input.py": "2da3f7dc91598d9539b24c17fb3eb4b94d674391338a8a03ff359708a7a86113"
   },
   "source_note": "Runtime image has dependencies not vendored here. Ignored Python caches and normalized shell files to LF. No live credentials/config/data included.",
@@ -313,10 +315,27 @@
     "image_id": "sha256:af4b88fd6fa714cf8a0a4efc99b3c94fb54e6747dfbd0b164a354beed2537d93"
   },
   "verification": {
-    "deployed_collection_files_matched": 278,
-    "source_secret_scan": "reviewed: only four non-deployed test fixtures matched",
-    "packaged_http_regression_tests": "11 passed (2026-11-04)",
-    "follower_sources": "match live Isaac follower source",
-    "leader_sources": "production files match deployed leader; tests are build source only"
+    "focused_spark_tests": 29,
+    "native_ros_domain": 197,
+    "live_images": {
+      "front": 39,
+      "wrist": 39
+    },
+    "http_jpeg_ws": "both cameras passed",
+    "capture_episodes": 2,
+    "capture_frames": 17,
+    "upload": "READY; remote content identical",
+    "receipt": "docs/so101-ros-images-v10r16-acceptance-20261105.json"
+  },
+  "ros_images": {
+    "domain_id": 96,
+    "message_type": "sensor_msgs/msg/Image",
+    "encoding": "rgb8",
+    "topics": {
+      "front": "/so101/camera/front/image_raw",
+      "wrist": "/so101/camera/wrist/image_raw"
+    },
+    "stamp_basis": "source captured_unix_ns; original monotonic retained in frame_info",
+    "new_timestamp_gates": false
   }
 }

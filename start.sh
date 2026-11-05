@@ -4,9 +4,9 @@
 # 改了 .env 之后再执行一次本脚本就生效：采哪台机器人等配置变了而容器没被重建时，会自动重启采集容器。
 set -euo pipefail
 cd "$(dirname "$0")"
-IMAGE=so101-collection:20261105-v10r15r1
+IMAGE=so101-collection:20261105-v10r16
 if ! docker image inspect "$IMAGE" >/dev/null 2>&1; then
-  docker load -i images/so101-collection-20261105-v10r15r1.tar.gz
+  docker load -i images/so101-collection-20261105-v10r16.tar.gz
 fi
 ./write-image-env.sh
 # 机器人配置只在容器启动时读取，先记下改之前的内容（文件不存在也照常往下走）

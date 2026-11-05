@@ -1,3 +1,20 @@
+# v10r16 — ROS 相机发布（2026-11-05）
+
+- 在现有采集容器内新增 so101_camera_publisher，Domain96，发布 /so101/camera/front/image_raw 与 /so101/camera/wrist/image_raw（sensor_msgs/Image，rgb8），以及各自的 frame_info（std_msgs/String）。
+- Image 头沿用源 captured_unix_ns；元数据保留原始 monotonic 时间、sequence、generation、帧身份及 RGB hash。未新增时间戳年龄/时差/顺序校验，源端已有检查保留。
+- 读取原有图像缓存，不打开摄像头、不依赖 Redis 回写图像；HTTP JPEG / WebSocket 与采集 REST 保持兼容。
+- Spark Linux ARM64 相关测试 29 项通过；隔离原生 ROS 测试通过；现场独立订阅收到两路各39帧且元数据匹配，HTTP JPEG与WS双路通过。
+- 新容器完整采集上传复测2条17帧，LeRobot原生校验、重采排除与远端文件一致性通过，上传READY。
+- 仅替换采集容器，其他运行容器与Perceptor源码未变。Perceptor消费端仍需同事按新版文档接入；本轮不宣称真实从臂或物理相机实测。
+
+新接入指南：docs/SO101-Perceptor关节图像Action统一ROS接入-v10r16-20261105.md。
+证据与完整现场帧元数据：docs/so101-ros-images-v10r16-acceptance-20261105.json。
+镜像：so101-collection:20261105-v10r16，GitHub只发布源码/文档，镜像二进制仍在Spark。
+
+---
+
+历史发布记录（保留）：
+
 # v10r15r1
 
 采集容器使用独立主臂节点的 action 与 Perceptor 观测完成 Redis 配对、LeRobot 录制及后台发送。修复当前录制中的状态查询误用旧版 API 的问题。

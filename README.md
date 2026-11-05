@@ -1,12 +1,14 @@
 # SO101 采集容器
 
-当前发布：**v10r15r1**。本仓库主目录只保留这一个版本的采集代码，对应 Spark 实际运行的 `so101-collection:20261105-v10r15r1`。版本标签使用镜像原有日期；本文整理日期为 2026-11-04（America/Los_Angeles）。
+当前发布：**v10r16**，对应 Spark 实际运行的 `so101-collection:20261105-v10r16`。主目录保留当前版本；历史代码通过 Git 标签查找。本文整理日期为 2026-11-05（America/Los_Angeles）。
 
 采集容器从 Redis 取观测和 action，生成 LeRobot 数据集并后台发送。**v10r15 起不读取主臂、不控制从臂，也不提供采集前对齐接口。** 主臂读取和从臂执行由独立节点负责。
 
-最新外部接入文档：[REST 最小接入指南 v10r15r1](docs/SO101采集容器REST最小接入指南-20261104-v10r15r1.md)，含全部最小请求、返回值解释、视频接口与完整仿真上传实测。旧版 [v10r11 指南](docs/history/SO101采集容器REST最小接入指南-20261029-v10r11.md) 保留原文供查历史。
+v10r16 **新增前方和腕部 ROS 图像发布**，Domain96，标准 `sensor_msgs/Image`（rgb8），原始时间戳与帧来源保留在配套 frame_info 中。原 HTTP JPEG / WebSocket 与采集 REST 接口继续兼容。
 
-供 Perceptor 接入同事使用：[观测与主臂 action 的 ROS 订阅接入说明](docs/SO101-Perceptor观测与主臂Action-ROS订阅接入说明-20261104.md)。状态推送已上线，Perceptor 仍需把 ARM_INSPECT 周期轮询改成订阅缓存；文档含实测消息和现有动作队列写入职责。
+给同事的最新版：[关节、图像、action 统一 ROS 接入 v10r16](docs/SO101-Perceptor关节图像Action统一ROS接入-v10r16-20261105.md)，含 Topic、QoS、时间基准及接收代码。ROS 发布端已上线，Perceptor 消费端仍需同事实施迁移；本轮未修改 Perceptor。
+
+采集 REST 继续使用 [v10r15r1 最小指南](docs/SO101采集容器REST最小接入指南-20261104-v10r15r1.md)。旧 [v10r11 指南](docs/history/SO101采集容器REST最小接入指南-20261029-v10r11.md) 和 [v15r1 状态/action 接入说明](docs/SO101-Perceptor观测与主臂Action-ROS订阅接入说明-20261104.md) 均保留，旧文档中没有相机 Topic 的描述是历史状态。
 
 ## 目录
 
@@ -14,6 +16,7 @@
 |---|---|
 | `image-files/opt/app/` | 采集服务、测试网页、SDK、Redis 配对与上传代码、测试 |
 | `image-files/opt/sim-retest/` | 容器入口与启动链 |
+| `image-files/opt/app/deployment_runtime/ros_images.py` | 常驻 ROS 相机发布进程；读取原缓存，不打开设备 |
 | `image-files/opt/converters/` | 冻结的数据转换器 |
 | `Dockerfile`、`docker-compose.yml` | 当前采集镜像构建与部署 |
 | `.env.example`、`apply-env.py` | 配置模板与生成器；真实 `.env` 不入库 |
@@ -33,7 +36,7 @@
 ```bash
 git clone https://github.com/boxW-cloud/so101-collector.git
 cd so101-collector
-git checkout v10r15r1
+git checkout v10r16
 python3 tools/verify-source.py
 docker image inspect so101-collection-runtime:20261015-v10r6-rsync >/dev/null
 ./build.sh
@@ -48,7 +51,7 @@ docker image inspect so101-collection-runtime:20261015-v10r6-rsync >/dev/null
 当前 Spark 工作目录仍是：
 
 ```text
-/home/nvidia/lerobot-so101-sdk/collection-container-v10r15r1-20261105/
+/home/nvidia/lerobot-so101-sdk/collection-container-v10r16-20261105/
 ```
 
 现有数据与配置位于 `/home/nvidia/so101-collection/{data,config,secrets,delivery}`；在新检出目录部署时，应显式配置这四个绝对路径，避免生成另一套空目录。配置完成且采集空闲后才执行 `./start.sh`；该命令会更新配置并可能重建容器。
@@ -58,9 +61,10 @@ docker image inspect so101-collection-runtime:20261015-v10r6-rsync >/dev/null
 ## 验收状态
 
 - 实测主臂 ROS action 约 30.58 Hz、从臂状态约 4.98 Hz。
-- 完整仿真链路实测：开始 → 重采 → 完成本条并继续 → 结束封存 → 现有服务器 SSH 上传 READY；最终 2 条、18 帧，两路 640×480，配对差 0.3～31.0 ms。
-- LeRobot 原生格式校验通过，废弃轮次未进入最终数据集；远端 28 个封存文件逐一 hash/大小一致，另有最后写入的 `.ready.json`。结束后恢复 IDLE、关闭供数；服务未重启。
+- Spark 镜像 29 项相关回归通过；独立 ROS 订阅收到前方 39 帧、腕部 39 帧，全部与元数据匹配，640×480 rgb8。源时间戳透传，未新增校验；HTTP JPEG/WS 双路通过。
+- 新容器完整仿真链路实测：开始 → 重采 → 完成本条并继续 → 结束封存 → SSH 上传 READY；2 条、17 帧，配对差 2.3～26.8 ms。原生 LeRobot 校验、废弃轮次排除和远端文件一致性通过。
+- 只替换采集容器，持久化挂载保留，其他运行容器身份和启动时间不变；v15r1 镜像/源码保留回退。
 - 修复运行中查询状态误走旧版 API 的问题。
 - 真实从臂新版、Composer 页面完整动作、全行程跟随精度未在本轮验收。主臂肩肘超过仿真限位时会被裁剪；七个原动作的限速、力矩限制保留。
 
-最新测试证据见 [完整链路验收摘要](docs/sim-chain-full-v15r1-acceptance.json)，控制分支和精度边界另见 `docs/control-chains-v10r15r1.md`，不把旧版测试总数当成本轮全量回归。版本及清理规则见 [版本管理说明](docs/version-policy.md)。
+最新证据见 [v10r16 验收与消息样本](docs/so101-ros-images-v10r16-acceptance-20261105.json)。旧版 [完整链路验收摘要](docs/sim-chain-full-v15r1-acceptance.json) 保留。控制分支和精度边界另见 `docs/control-chains-v10r15r1.md`；版本及清理规则见 [版本管理说明](docs/version-policy.md)。

@@ -1,0 +1,487 @@
+{
+  "schema": "so101.ros-images.acceptance.v1",
+  "release": "v10r16",
+  "verified_date": "2026-11-05",
+  "timezone": "America/Los_Angeles",
+  "image": "so101-collection:20261105-v10r16",
+  "image_id": "sha256:8e7bc46b7b6b63b22637fedf35c7c1b295770e8ea8e7a68518f8212906f28a82",
+  "container_id": "a021626849b0c0b3a2c4bae5dda2cc5139ea2d99c68634bc64556ac8133636fb",
+  "source_directory": "/home/nvidia/lerobot-so101-sdk/collection-container-v10r16-20261105",
+  "focused_image_tests": {
+    "passed": 29,
+    "platform": "Spark Linux ARM64",
+    "initial_red_tests": 9,
+    "windows_run": "new cases pass; unchanged HTTP atomic-replace test hit Windows sharing denial; target Linux suite29 passed"
+  },
+  "native_ros_test": {
+    "phase": "PASSED",
+    "domain": "197",
+    "counts": {
+      "front": {
+        "images": 3,
+        "metadata": 3,
+        "old_images": 1,
+        "old_metadata": 1
+      },
+      "wrist": {
+        "images": 3,
+        "metadata": 3,
+        "old_images": 1,
+        "old_metadata": 1
+      }
+    },
+    "headers": {
+      "front": {
+        "sec": 0,
+        "nanosec": 1,
+        "rgb_sha256": "217dc1f75e8c999fda4ffb0c94eb1386c0104f585c5387129d6a4b2e3981c738"
+      },
+      "wrist": {
+        "sec": 0,
+        "nanosec": 1,
+        "rgb_sha256": "7638c8c6769e870783f353b625743d283ca1a0571f8a389dfff41b71637412b4"
+      }
+    },
+    "source_unix_ns_1_preserved_without_new_age_gate": true,
+    "pixels_exact": true,
+    "publisher_exit": 0
+  },
+  "live_ros": {
+    "phase": "PASSED",
+    "counts": {
+      "front": 39,
+      "wrist": 39
+    },
+    "matched_image_metadata": {
+      "front": 39,
+      "wrist": 39
+    },
+    "state_action_counts": {
+      "state": 50,
+      "action": 301
+    },
+    "examples": {
+      "front": {
+        "schema": "so101.ros.camera-frame.v1",
+        "camera_key": "front",
+        "image_topic": "/so101/camera/front/image_raw",
+        "ros_header": {
+          "frame_id": "so101_front_optical_frame",
+          "stamp": {
+            "sec": 1793867454,
+            "nanosec": 717811797
+          }
+        },
+        "stamp_time_basis": "unix",
+        "captured_unix_ns": 1793867454717811797,
+        "rgb_sha256": "3830e43fc7eee1ed696299ade92510b704de392beeed6839d177c35464d78248",
+        "frame": {
+          "camera_key": "front",
+          "captured_monotonic_ns": 1468900029870633,
+          "dtype": "uint8",
+          "encoding": "rgb8",
+          "frame_id": "frame-2d79db74ccbfe30404785a8b9122f86f",
+          "height": 480,
+          "identity_basis": "camera_and_capture_time",
+          "received_monotonic_ns": 1468900079647832,
+          "schema": "collection.frame.v1",
+          "source": {
+            "captured_unix_ns": 1793867454717811797,
+            "generation": "be0461213519417581438118fd980892",
+            "kind": "isaac_preview",
+            "original_metadata": {
+              "age_s": 0.043879579,
+              "captured_monotonic_ns": 1468900029870633,
+              "captured_unix_ns": 1793867454717811797,
+              "filename": "front-preview-1.png",
+              "fresh": true,
+              "generation": "be0461213519417581438118fd980892",
+              "sequence": 339193,
+              "sha256": "60b72b82681cd955576669c2140d6ae01359c932307635daca8f62c1aa1a2996",
+              "shape": [
+                480,
+                640,
+                3
+              ],
+              "size": 328885,
+              "source": "sim"
+            },
+            "process_id": "sim:be0461213519417581438118fd980892",
+            "sequence": 339193,
+            "time_basis": "host_monotonic"
+          },
+          "width": 640
+        }
+      },
+      "wrist": {
+        "schema": "so101.ros.camera-frame.v1",
+        "camera_key": "wrist",
+        "image_topic": "/so101/camera/wrist/image_raw",
+        "ros_header": {
+          "frame_id": "so101_wrist_optical_frame",
+          "stamp": {
+            "sec": 1793867454,
+            "nanosec": 717811797
+          }
+        },
+        "stamp_time_basis": "unix",
+        "captured_unix_ns": 1793867454717811797,
+        "rgb_sha256": "d0d85a4bb3b87dd5f1188f836e81303911a8fd87eef3776b2136dcf56d809e9a",
+        "frame": {
+          "camera_key": "wrist",
+          "captured_monotonic_ns": 1468900029870633,
+          "dtype": "uint8",
+          "encoding": "rgb8",
+          "frame_id": "frame-e3367c861703aa4086753241091c7172",
+          "height": 480,
+          "identity_basis": "camera_and_capture_time",
+          "received_monotonic_ns": 1468900086866564,
+          "schema": "collection.frame.v1",
+          "source": {
+            "captured_unix_ns": 1793867454717811797,
+            "generation": "be0461213519417581438118fd980892",
+            "kind": "isaac_preview",
+            "original_metadata": {
+              "age_s": 0.051066581,
+              "captured_monotonic_ns": 1468900029870633,
+              "captured_unix_ns": 1793867454717811797,
+              "filename": "wrist-preview-1.png",
+              "fresh": true,
+              "generation": "be0461213519417581438118fd980892",
+              "sequence": 339193,
+              "sha256": "336244b10e639f7a899dfad0597860ffbfacad792b57a01dee356c25df1c9f64",
+              "shape": [
+                480,
+                640,
+                3
+              ],
+              "size": 323754,
+              "source": "sim"
+            },
+            "process_id": "sim:be0461213519417581438118fd980892",
+            "sequence": 339193,
+            "time_basis": "host_monotonic"
+          },
+          "width": 640
+        }
+      }
+    },
+    "sample_images": [
+      {
+        "camera": "front",
+        "sec": 1793867454,
+        "nanosec": 460573195,
+        "rgb_sha256": "910aac4daa975ac39bddaace2ca2ff5b20aef39b257c45733150783bbc41851d",
+        "frame_id": "so101_front_optical_frame",
+        "bytes": 921600
+      },
+      {
+        "camera": "wrist",
+        "sec": 1793867454,
+        "nanosec": 460573195,
+        "rgb_sha256": "6fdf7708c6d069b572bc84c0be0e84e67447471551cfaa1b2912f5cd8929ccb1",
+        "frame_id": "so101_wrist_optical_frame",
+        "bytes": 921600
+      },
+      {
+        "camera": "front",
+        "sec": 1793867454,
+        "nanosec": 717811797,
+        "rgb_sha256": "3830e43fc7eee1ed696299ade92510b704de392beeed6839d177c35464d78248",
+        "frame_id": "so101_front_optical_frame",
+        "bytes": 921600
+      },
+      {
+        "camera": "wrist",
+        "sec": 1793867454,
+        "nanosec": 717811797,
+        "rgb_sha256": "d0d85a4bb3b87dd5f1188f836e81303911a8fd87eef3776b2136dcf56d809e9a",
+        "frame_id": "so101_wrist_optical_frame",
+        "bytes": 921600
+      }
+    ],
+    "publishers": {
+      "front": [
+        "so101_camera_publisher"
+      ],
+      "wrist": [
+        "so101_camera_publisher"
+      ]
+    },
+    "http_compatibility": {
+      "front": {
+        "jpeg_http": 200,
+        "bytes": 25928,
+        "ws_frames": 2
+      },
+      "wrist": {
+        "jpeg_http": 200,
+        "bytes": 22518,
+        "ws_frames": 2
+      }
+    },
+    "perceptor_unchanged": true
+  },
+  "capture_upload": {
+    "phase": "PASSED",
+    "batch_id": "sim-full-v16-fca8145b47c9",
+    "steps": [
+      {
+        "action": "start",
+        "request": {
+          "id": "sim-full-v16-fca8145b47c9",
+          "name": "仿真全链路验收（测试数据）",
+          "description": "真实主臂只读输入；Isaac 仿真；验证 redo/complete/finish/SSH 上传；非抓取效果验收",
+          "fps": 2
+        },
+        "ack": {
+          "http": 202,
+          "ok": true,
+          "result": {
+            "accepted": true,
+            "message": "已接收，后台执行中"
+          },
+          "elapsed_s": 0.0221
+        },
+        "at": 1793867685.7711565
+      },
+      {
+        "action": "redo",
+        "request": {},
+        "ack": {
+          "http": 202,
+          "ok": true,
+          "result": {
+            "accepted": true,
+            "message": "已接收，后台执行中"
+          },
+          "elapsed_s": 0.0104
+        },
+        "at": 1793867700.0557828
+      },
+      {
+        "action": "complete",
+        "request": {},
+        "ack": {
+          "http": 202,
+          "ok": true,
+          "result": {
+            "accepted": true,
+            "message": "已接收，后台执行中"
+          },
+          "elapsed_s": 0.006
+        },
+        "at": 1793867706.0483093
+      },
+      {
+        "action": "finish",
+        "request": {},
+        "ack": {
+          "http": 202,
+          "ok": true,
+          "result": {
+            "accepted": true,
+            "message": "已接收，后台执行中"
+          },
+          "elapsed_s": 0.0103
+        },
+        "at": 1793867711.9149132
+      }
+    ],
+    "final_status": {
+      "state": "IDLE",
+      "robot_id": "so101-sim-capture",
+      "robot_revision": "redis-0f2a2a769204",
+      "target_type": "physical",
+      "session_id": "sim-full-v16-fca8145b47c9",
+      "finished": true,
+      "finish_state": "QUEUED_UPLOAD",
+      "automatic_upload": true,
+      "upload_operation": "4116879a2cc04dd8b68038ce12fa0de3"
+    },
+    "final_switch": "",
+    "verification": {
+      "native_readable": true,
+      "episodes": 2,
+      "frames": 17,
+      "episode_lengths": [
+        10,
+        7
+      ],
+      "source_root": "/data/collection-snapshots/sim-full-v16-fca8145b47c9/5ff86fa22baf48499e27bac5a3418de7-g1",
+      "remote_host": "192.168.1.16",
+      "remote_folder": "/home/lxk/dev2/action-composer/data/artifacts/data_set/sim-full-v16-fca8145b47c9",
+      "content_hash": "sha256:a4f5b8d8519c42976ca177d0cce354ddcf26a3ec45a3bc8b36750ca4bc374357",
+      "manifest_sha256": "f106d89b54ff87d5f0a582d2bab557eccbe19f56a597de752e1dca5340cb175f",
+      "source_file_count": 27,
+      "remote_file_count": 28,
+      "remote_content_identical": true,
+      "ready_marker": {
+        "schema": "so101.collection-sync.v1",
+        "id": "sim-full-v16-fca8145b47c9",
+        "folder": "sim-full-v16-fca8145b47c9",
+        "format": "lerobot_v3",
+        "content_hash": "sha256:a4f5b8d8519c42976ca177d0cce354ddcf26a3ec45a3bc8b36750ca4bc374357",
+        "manifest_sha256": "f106d89b54ff87d5f0a582d2bab557eccbe19f56a597de752e1dca5340cb175f",
+        "file_count": 27,
+        "total_bytes": 1078351,
+        "completed_at": "2026-11-05T08:35:19Z"
+      },
+      "joint_names": [
+        "shoulder_pan.pos",
+        "shoulder_lift.pos",
+        "elbow_flex.pos",
+        "wrist_flex.pos",
+        "wrist_roll.pos",
+        "gripper.pos"
+      ],
+      "units": [
+        "deg",
+        "deg",
+        "deg",
+        "deg",
+        "deg",
+        "normalized_0_100"
+      ],
+      "camera_shapes": {
+        "front": [
+          480,
+          640,
+          3
+        ],
+        "wrist": [
+          480,
+          640,
+          3
+        ]
+      },
+      "source_frame_index_rows": 34,
+      "action_delay_s": {
+        "min": 0.0023,
+        "max": 0.0268
+      },
+      "discarded_attempt_excluded": true,
+      "files": {
+        "manifest.json": {
+          "sha256": "f106d89b54ff87d5f0a582d2bab557eccbe19f56a597de752e1dca5340cb175f",
+          "bytes": 13210
+        },
+        "meta/collection-source.json": {
+          "sha256": "5fa14fa8dca9398aae0b9ec3eab3485689749e8ecaae233bda7b89a2c087a5f9",
+          "bytes": 5026
+        },
+        "meta/tasks.parquet": {
+          "sha256": "59a6f5893267aa310778fec3a6dc1f24da464772f087203ab2fcc5f42c32e5d7",
+          "bytes": 2185
+        },
+        "meta/info.json": {
+          "sha256": "0c5d054141500dce539d27966ccf8bde3aac89c0681fe438293de2793fcd66b0",
+          "bytes": 5387
+        },
+        "meta/stats.json": {
+          "sha256": "8ce7831330bd58f47dbb268a084c780f051025cce8b808b6d6017f5847c46795",
+          "bytes": 20457
+        },
+        "meta/frame-index.jsonl": {
+          "sha256": "0be201ef3598041e29ea43a31a44ccebb4a6c766d02553e39857b76f11ca3e5a",
+          "bytes": 33776
+        },
+        "meta/episodes/chunk-000/file-000.parquet": {
+          "sha256": "f0b08aefc3cc9478e1a102570566b5a831e9e0ee85a259cfb1f756df2483b0e8",
+          "bytes": 141497
+        },
+        "meta/source-frames/episode-000001/frame-00000006.json": {
+          "sha256": "3d685f7808912333dd0278a36f6f9426b3f901545edea2eaa810a4ed850481a4",
+          "bytes": 5548
+        },
+        "meta/source-frames/episode-000001/frame-00000003.json": {
+          "sha256": "d1c12b127ce76406eddd69b44235b6885b2e4906f7e066f7825712f20f0c38eb",
+          "bytes": 5548
+        },
+        "meta/source-frames/episode-000001/frame-00000002.json": {
+          "sha256": "f5e97e1530ab7126caec1ff866a6f181e1d8bad0ab14bf152f23c916207a2bf4",
+          "bytes": 5548
+        },
+        "meta/source-frames/episode-000001/frame-00000000.json": {
+          "sha256": "488437c29af78a8c12f0b27bcf1840244e90a137814b4424eb841f39a1411f0f",
+          "bytes": 5545
+        },
+        "meta/source-frames/episode-000001/frame-00000001.json": {
+          "sha256": "8291b8710183e40650f9509d74919fad491b09f0753d9b5e6c3a4709f61a5f88",
+          "bytes": 5542
+        },
+        "meta/source-frames/episode-000001/frame-00000005.json": {
+          "sha256": "ada03295047536dc65cbd651f1ee2ba3687ed73c53d48792bb8e1d360c8c079f",
+          "bytes": 5548
+        },
+        "meta/source-frames/episode-000001/frame-00000004.json": {
+          "sha256": "68dd26d6ded8c28d5b2a6b7bacdda18d3dd78719e850b4395cb6d7cc1289552b",
+          "bytes": 5541
+        },
+        "meta/source-frames/episode-000000/frame-00000006.json": {
+          "sha256": "5f4bfcfc1e7c9f4afd8cd7512d79bda43a0c977fd48ea2dd6af8c24d4865a88c",
+          "bytes": 5550
+        },
+        "meta/source-frames/episode-000000/frame-00000003.json": {
+          "sha256": "ed2ae590184a41bf685c0a2e75c71c3117ff45f46328502c47775bf39ec1207c",
+          "bytes": 5542
+        },
+        "meta/source-frames/episode-000000/frame-00000002.json": {
+          "sha256": "bf850f57966777e51afc62b4033a73d6fc73b7f33b13ebc0fc5e770f5460cd44",
+          "bytes": 5543
+        },
+        "meta/source-frames/episode-000000/frame-00000000.json": {
+          "sha256": "e235cc447d3c384e8882a4eebb7e26f148859853b647d2d6227156336b61c30e",
+          "bytes": 5550
+        },
+        "meta/source-frames/episode-000000/frame-00000001.json": {
+          "sha256": "a24b24b977f958de5d6f18b73322c768655fabc613937c56226e587072eee0b1",
+          "bytes": 5549
+        },
+        "meta/source-frames/episode-000000/frame-00000008.json": {
+          "sha256": "c0e13e6dcd518ca7ad5df692b2c1f63c2dd3494475e90dd0dc862adbb9d03c63",
+          "bytes": 5543
+        },
+        "meta/source-frames/episode-000000/frame-00000005.json": {
+          "sha256": "62fe37bda5fb92caa256c6b1728d759d6990a32cbf4db773839782058235a6cb",
+          "bytes": 5546
+        },
+        "meta/source-frames/episode-000000/frame-00000007.json": {
+          "sha256": "6391f79a9f4d9dfb51ab63c7d5a0bb9b5a285a6b4d183434f4a04b0557ca49da",
+          "bytes": 5547
+        },
+        "meta/source-frames/episode-000000/frame-00000009.json": {
+          "sha256": "9a846d5ac67cd9f65f236481acab26fabe9236a1b74f14f7ba9878a96a0960e3",
+          "bytes": 5547
+        },
+        "meta/source-frames/episode-000000/frame-00000004.json": {
+          "sha256": "d1929fa3241c45609780b3003886b1f0a532b19a196f65c501d313efc1ac5254",
+          "bytes": 5550
+        },
+        "videos/observation.images.front/chunk-000/file-000.mp4": {
+          "sha256": "1d81a947628581a8c8387945cea9c14f354d33640b58471a9165afaba9468e32",
+          "bytes": 392014
+        },
+        "videos/observation.images.wrist/chunk-000/file-000.mp4": {
+          "sha256": "486ac07e101fd71bc46c6df58ad450f70e95729c34767b8b94ede14dc7efad18",
+          "bytes": 358079
+        },
+        "data/chunk-000/file-000.parquet": {
+          "sha256": "5254483e291a47ff4a32f948f33839328f7336c18de8ef6ebaeb4de9d94ba342",
+          "bytes": 12433
+        }
+      }
+    },
+    "containers_unchanged": true
+  },
+  "perceptor_modified": false,
+  "other_running_containers_unchanged": true,
+  "mounts_unchanged": true,
+  "timestamp_validation_added": false,
+  "http_compatible": true,
+  "notes": [
+    "Perceptor consumption still uses ARM_INSPECT and HTTP. ROS subscription consumer migration is not implemented.",
+    "Initial full-capture harness rejected an IDLE status carrying a historical batch id; no commands had been submitted. Corrected harness resumed the same batch id.",
+    "Physical camera RGB reader tested with FrameStore fixtures; live acceptance uses Isaac cameras."
+  ]
+}

@@ -3,7 +3,7 @@
 name: so101-collection
 services:
   collection:
-    image: ${COLLECTION_IMAGE:-so101-collection:20261105-v10r15r1}
+    image: ${COLLECTION_IMAGE:-so101-collection:20261105-v10r16}
     build:
       context: .
       dockerfile: Dockerfile
@@ -27,6 +27,9 @@ services:
     stop_grace_period: 90s
     environment:
       SO101_IMAGE_ID: ${COLLECTION_IMAGE_ID:?Run ./start.sh or ./build.sh first}
+      SO101_CAMERA_ROS_ENABLED: ${COLLECTION_ROS_IMAGES_ENABLED:-1}
+      SO101_CAMERA_ROS_DOMAIN_ID: ${COLLECTION_ROS_IMAGES_DOMAIN_ID:-96}
+      SO101_CAMERA_ROS_RATE_HZ: ${COLLECTION_ROS_IMAGES_RATE_HZ:-10}
     volumes:
       # 采集数据 + 同步队列（/data/rsync-uploads），必须持久化。Isaac 仿真和它共用 isaac-console 子目录
       - type: bind

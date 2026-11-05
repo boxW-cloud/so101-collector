@@ -33,6 +33,16 @@ def real_cameras():
     except (OSError,ValueError):return None
     return path if value.get('enabled') is True and value.get('cameras') else None
 
+def image_ros_environment(parent):
+    """Images share Domain96 with SO101 state/action, separate from legacy peers."""
+    env=dict(parent)
+    env.update(ROS_DOMAIN_ID=env.get('SO101_CAMERA_ROS_DOMAIN_ID','96'), ROS_LOCALHOST_ONLY='0',
+               RMW_IMPLEMENTATION='rmw_fastrtps_cpp', FASTDDS_BUILTIN_TRANSPORTS='UDPv4',
+               ROS_AUTOMATIC_DISCOVERY_RANGE='SUBNET', ROS_LOG_DIR='/tmp/so101-camera-ros-log')
+    for key in ('FASTRTPS_DEFAULT_PROFILES_FILE','FASTDDS_DEFAULT_PROFILES_FILE'):
+        env.pop(key,None)
+    return env
+
 def main():
     root=Path('/data/isaac-console');generation=json.loads((root/'generation.json').read_text())['generation']
     robot=configured_robot();os.environ['SO101_COLLECTION_ROBOT']=robot
@@ -52,9 +62,9 @@ def main():
     config,accounts=prepare()
     stop=threading.Event();children={};logs={}
     for sig in (signal.SIGTERM,signal.SIGINT):signal.signal(sig,lambda *_:stop.set())
-    def spawn(name,args):
+    def spawn(name,args,env=None):
         logs[name]=(root/('retest-'+name+'.log')).open('ab')
-        children[name]=subprocess.Popen([sys.executable,*args],cwd='/opt/app',stdout=logs[name],stderr=logs[name])
+        children[name]=subprocess.Popen([sys.executable,*args],cwd='/opt/app',stdout=logs[name],stderr=logs[name],env=env)
     try:
         spawn('api',['-m','deployment_runtime.http','--config',str(config),'--accounts',str(accounts)])
         until=time.monotonic()+45
@@ -68,6 +78,8 @@ def main():
         if robot=='so101-sim':   # 只看画面：读 Isaac 写的预览图，不控制 Isaac
             spawn('preview',['/opt/app/integration/simulation/passive_preview.py','--ipc-directory',str(root/'ipc'),'--generation',generation,'--bind','127.0.0.1','--port','8922'])
         if cameras:spawn('camera',['-m','deployment_runtime.camera_service','--config',str(cameras)])
+        if robot in ('so101','so101-sim') and os.environ.get('SO101_CAMERA_ROS_ENABLED','1')=='1':
+            spawn('ros_images',['-m','deployment_runtime.ros_images'],env=image_ros_environment(os.environ))
         if redis_on:spawn('redis',['-m','deployment_runtime.redis_capture','serve','--config',str(redis_peer)])
         spawn('console',['-m','collection_console.server','--config',str(console_config)])
         print(json.dumps({'robot':robot,'services':{n:p.pid for n,p in children.items()},'generation':generation,'auto_recording':False,
@@ -76,7 +88,7 @@ def main():
             dead={n:p.returncode for n,p in children.items() if p.poll() is not None}
             if dead:raise RuntimeError('Child exited: '+json.dumps(dead))
     finally:
-        for name in ['api','console','preview','redis','camera']:
+        for name in ['ros_images','api','console','preview','redis','camera']:
             p=children.get(name)
             if p and p.poll() is None:
                 p.terminate()

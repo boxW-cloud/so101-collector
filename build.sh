@@ -3,9 +3,9 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 RUNTIME=so101-collection-runtime:20261015-v10r6-rsync
-IMAGE=so101-collection:20261105-v10r15r1
+IMAGE=so101-collection:20261105-v10r16
 if ! docker image inspect "$RUNTIME" >/dev/null 2>&1; then
-  docker load -i images/so101-collection-20261105-v10r15r1.tar.gz
+  docker load -i images/so101-collection-20261105-v10r16.tar.gz
 fi
 docker build --pull=false --network=none -t "$IMAGE" .
 ./write-image-env.sh
