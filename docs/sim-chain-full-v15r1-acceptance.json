@@ -1,0 +1,340 @@
+{
+  "schema": "so101.sim-collection-full-chain.v1",
+  "verified_date": "2026-11-04",
+  "timezone": "America/Los_Angeles",
+  "phase": "PASSED",
+  "batch_id": "sim-full-v15r1-2181e3f95538",
+  "collection_image": "so101-collection:20261105-v10r15r1",
+  "collection_image_id": "sha256:915c57e21e52ac6ef6bab52f0e180e6f4d6066b9794848be8a9cfff0ce3b795a",
+  "simulation_backend": "Isaac; physical leader read-only; physical follower controller remains stopped",
+  "http_steps": [
+    {
+      "action": "start",
+      "request": {
+        "id": "sim-full-v15r1-2181e3f95538",
+        "name": "仿真全链路验收（测试数据）",
+        "description": "真实主臂只读输入；Isaac 仿真；验证 redo/complete/finish/SSH 上传；非抓取效果验收",
+        "fps": 2
+      },
+      "ack": {
+        "http": 202,
+        "ok": true,
+        "result": {
+          "accepted": true,
+          "message": "已接收，后台执行中"
+        },
+        "elapsed_s": 0.0085
+      },
+      "at": 1793860164.8276825
+    },
+    {
+      "action": "redo",
+      "request": {},
+      "ack": {
+        "http": 202,
+        "ok": true,
+        "result": {
+          "accepted": true,
+          "message": "已接收，后台执行中"
+        },
+        "elapsed_s": 0.0131
+      },
+      "at": 1793860172.2549543
+    },
+    {
+      "action": "complete",
+      "request": {},
+      "ack": {
+        "http": 202,
+        "ok": true,
+        "result": {
+          "accepted": true,
+          "message": "已接收，后台执行中"
+        },
+        "elapsed_s": 0.0059
+      },
+      "at": 1793860178.450919
+    },
+    {
+      "action": "finish",
+      "request": {},
+      "ack": {
+        "http": 202,
+        "ok": true,
+        "result": {
+          "accepted": true,
+          "message": "已接收，后台执行中"
+        },
+        "elapsed_s": 0.0063
+      },
+      "at": 1793860184.1520257
+    }
+  ],
+  "before_redo": {
+    "session_id": "sim-full-v15r1-2181e3f95538",
+    "dataset_id": "sim-full-v15r1-2181e3f95538",
+    "robot_id": "so101-sim-capture",
+    "robot_revision": "redis-0f2a2a769204",
+    "target_type": "physical",
+    "operator": "operator",
+    "episode_id": "278af95b4b6d4aa19b427915dc1bfffe",
+    "episode_index": 0,
+    "state": "RUNNING",
+    "current_frames": 11,
+    "committed_episodes": 0,
+    "manual_connection_required": false,
+    "notice": null
+  },
+  "after_redo": {
+    "session_id": "sim-full-v15r1-2181e3f95538",
+    "dataset_id": "sim-full-v15r1-2181e3f95538",
+    "robot_id": "so101-sim-capture",
+    "robot_revision": "redis-0f2a2a769204",
+    "target_type": "physical",
+    "operator": "operator",
+    "episode_id": "96df3ea628fa4f729920c06fecbf032a",
+    "episode_index": 0,
+    "state": "RUNNING",
+    "current_frames": 9,
+    "committed_episodes": 0,
+    "manual_connection_required": false,
+    "notice": null
+  },
+  "after_complete": {
+    "session_id": "sim-full-v15r1-2181e3f95538",
+    "dataset_id": "sim-full-v15r1-2181e3f95538",
+    "robot_id": "so101-sim-capture",
+    "robot_revision": "redis-0f2a2a769204",
+    "target_type": "physical",
+    "operator": "operator",
+    "episode_id": "b45f8a4f64664cdbb1b8adcd8cdc4451",
+    "episode_index": 1,
+    "state": "RUNNING",
+    "current_frames": 8,
+    "committed_episodes": 1,
+    "manual_connection_required": false,
+    "notice": null
+  },
+  "final_status": {
+    "state": "IDLE",
+    "robot_id": "so101-sim-capture",
+    "robot_revision": "redis-0f2a2a769204",
+    "target_type": "physical",
+    "session_id": "sim-full-v15r1-2181e3f95538",
+    "finished": true,
+    "finish_state": "QUEUED_UPLOAD",
+    "automatic_upload": true,
+    "upload_operation": "04d1cb04ce4c49329ebf2be8c3d3bf26"
+  },
+  "finished_batch_status": {
+    "http": 200,
+    "ok": true,
+    "result": {
+      "session_id": "sim-full-v15r1-2181e3f95538",
+      "dataset_id": "sim-full-v15r1-2181e3f95538",
+      "robot_id": "so101-sim-capture",
+      "robot_revision": "redis-0f2a2a769204",
+      "target_type": "physical",
+      "episode_id": "b603ce52721b44ce973f875f03f6aa7a",
+      "episode_index": 2,
+      "state": "IDLE",
+      "active": false,
+      "finish_state": "QUEUED_UPLOAD",
+      "finished": true,
+      "automatic_upload": true,
+      "upload_operation": "04d1cb04ce4c49329ebf2be8c3d3bf26"
+    },
+    "elapsed_s": 0.0078
+  },
+  "checks": {
+    "discarded_raw_files_removed": true,
+    "discarded_attempt_excluded": true,
+    "no_upload_before_finish": true,
+    "supply_closed_after_finish": true,
+    "running_containers_unchanged": true
+  },
+  "upload_state": "READY",
+  "upload_attempts": 1,
+  "verification": {
+    "native_readable": true,
+    "episodes": 2,
+    "frames": 18,
+    "episode_lengths": [
+      10,
+      8
+    ],
+    "source_root": "/data/collection-snapshots/sim-full-v15r1-2181e3f95538/b45f8a4f64664cdbb1b8adcd8cdc4451-g1",
+    "remote_host": "192.168.1.16",
+    "remote_folder": "/home/lxk/dev2/action-composer/data/artifacts/data_set/sim-full-v15r1-2181e3f95538",
+    "content_hash": "sha256:3ea795ed0d84b9779dd652964707ff850e9245a3e3be70274381fe1198c8ac5a",
+    "manifest_sha256": "851f15b2eaa9e4d5f093df70df466030e554027d536138d7601232dbe49e0a69",
+    "source_file_count": 28,
+    "remote_file_count": 29,
+    "remote_content_identical": true,
+    "ready_marker": {
+      "schema": "so101.collection-sync.v1",
+      "id": "sim-full-v15r1-2181e3f95538",
+      "folder": "sim-full-v15r1-2181e3f95538",
+      "format": "lerobot_v3",
+      "content_hash": "sha256:3ea795ed0d84b9779dd652964707ff850e9245a3e3be70274381fe1198c8ac5a",
+      "manifest_sha256": "851f15b2eaa9e4d5f093df70df466030e554027d536138d7601232dbe49e0a69",
+      "file_count": 28,
+      "total_bytes": 1102442,
+      "completed_at": "2026-11-05T06:29:51Z"
+    },
+    "joint_names": [
+      "shoulder_pan.pos",
+      "shoulder_lift.pos",
+      "elbow_flex.pos",
+      "wrist_flex.pos",
+      "wrist_roll.pos",
+      "gripper.pos"
+    ],
+    "units": [
+      "deg",
+      "deg",
+      "deg",
+      "deg",
+      "deg",
+      "normalized_0_100"
+    ],
+    "camera_shapes": {
+      "front": [
+        480,
+        640,
+        3
+      ],
+      "wrist": [
+        480,
+        640,
+        3
+      ]
+    },
+    "source_frame_index_rows": 36,
+    "action_delay_s": {
+      "min": 0.0003,
+      "max": 0.031
+    },
+    "discarded_attempt_excluded": true,
+    "files": {
+      "manifest.json": {
+        "sha256": "851f15b2eaa9e4d5f093df70df466030e554027d536138d7601232dbe49e0a69",
+        "bytes": 13638
+      },
+      "meta/collection-source.json": {
+        "sha256": "be9c0acab0e1e7d29ea99dc8a2626b9c2bb785369baac02bb8502790c2577193",
+        "bytes": 5092
+      },
+      "meta/tasks.parquet": {
+        "sha256": "59a6f5893267aa310778fec3a6dc1f24da464772f087203ab2fcc5f42c32e5d7",
+        "bytes": 2185
+      },
+      "meta/info.json": {
+        "sha256": "33a1916a5f3802e9bd4d3475a9d3a4b6dde63b0f555ca7bebf649de0df0719d8",
+        "bytes": 5387
+      },
+      "meta/stats.json": {
+        "sha256": "082115e12c152963fdc1ee54c8b1bda0f638c254215924da3dab1445692725be",
+        "bytes": 20444
+      },
+      "meta/frame-index.jsonl": {
+        "sha256": "d435928eb4013e1caf91395cb825fc29d3ad3aa3c825d7ec40e77d66e7b97992",
+        "bytes": 35762
+      },
+      "meta/episodes/chunk-000/file-000.parquet": {
+        "sha256": "69669925a1ba0cb6c946d2846ad8210efc921106c6448350de7ccbf96004e918",
+        "bytes": 141494
+      },
+      "meta/source-frames/episode-000001/frame-00000006.json": {
+        "sha256": "4ae222a6563018104dd2757ff2bc9ec4649f3c1124fba9a2f8df119f92835fa0",
+        "bytes": 5553
+      },
+      "meta/source-frames/episode-000001/frame-00000003.json": {
+        "sha256": "dc08a72b84dc7660bb86eee1671214830ce2b2bef68a7fde17dcc74fe6e7e9e3",
+        "bytes": 5553
+      },
+      "meta/source-frames/episode-000001/frame-00000002.json": {
+        "sha256": "c367c8c9e4e98acc36b8faaa6d0259ce6d32961a0a6621231397c936bf494a0b",
+        "bytes": 5549
+      },
+      "meta/source-frames/episode-000001/frame-00000000.json": {
+        "sha256": "d5472a5fcfc741b54616fea33ffb08782c922a5446cb5700cecdb1f0755e9cdc",
+        "bytes": 5551
+      },
+      "meta/source-frames/episode-000001/frame-00000001.json": {
+        "sha256": "a62ffe1fb181efc4f54992c835a99bc1cfa0861a021f4ade4881861fa1f511c5",
+        "bytes": 5551
+      },
+      "meta/source-frames/episode-000001/frame-00000005.json": {
+        "sha256": "d541796531e7f3273531d80bd98b8103ea78364e2c506761b5cb10d34943343c",
+        "bytes": 5553
+      },
+      "meta/source-frames/episode-000001/frame-00000007.json": {
+        "sha256": "46cc3d1f56d6f4caf52d7a22d5c59cfea26f5d313b5371e9f22750ed2718de5c",
+        "bytes": 5551
+      },
+      "meta/source-frames/episode-000001/frame-00000004.json": {
+        "sha256": "afeb0124ad2bf3966ccb85a9eb6fbb493a05dbb472efe20f98cf54a87540e532",
+        "bytes": 5551
+      },
+      "meta/source-frames/episode-000000/frame-00000006.json": {
+        "sha256": "fe2c0a284c34c65d99a428fba03b409122166a53984f930f81bd0e07a8d6d776",
+        "bytes": 5550
+      },
+      "meta/source-frames/episode-000000/frame-00000003.json": {
+        "sha256": "bd2bd36bbeabfc02830b8add81fe9a03ed71b84799aab2e9949b1fb93ee0994d",
+        "bytes": 5551
+      },
+      "meta/source-frames/episode-000000/frame-00000002.json": {
+        "sha256": "ab2cf9952fe47cf1c1c4a6f71fc33ddf0447c4cced0452bf1e7135bad8dce2bb",
+        "bytes": 5547
+      },
+      "meta/source-frames/episode-000000/frame-00000000.json": {
+        "sha256": "52e7f142cdeb7febbc834062f6d6919a80cc2edf6397d170a212c6ef9832d489",
+        "bytes": 5549
+      },
+      "meta/source-frames/episode-000000/frame-00000001.json": {
+        "sha256": "b646daeb238c14615cc03cda7ef39832ef1514cb768d8168a65e2c4d20d8a08b",
+        "bytes": 5553
+      },
+      "meta/source-frames/episode-000000/frame-00000008.json": {
+        "sha256": "157fd765fd7ce03e7f2187338c053bf4600d0275b1485685b075a90fd9bb5d44",
+        "bytes": 5553
+      },
+      "meta/source-frames/episode-000000/frame-00000005.json": {
+        "sha256": "7a025fc2ea9dedb1858e7edd170fa0bd856db85a0f4bd4ceb901d63365ec5534",
+        "bytes": 5555
+      },
+      "meta/source-frames/episode-000000/frame-00000007.json": {
+        "sha256": "23f3435fa60c2129fefb8270b350409e72eb114773ded190f048b56c09bdd6c3",
+        "bytes": 5552
+      },
+      "meta/source-frames/episode-000000/frame-00000009.json": {
+        "sha256": "c97817f41f7d47f90229139e459458395e14daf2043a3e276f13f58e63e6224c",
+        "bytes": 5552
+      },
+      "meta/source-frames/episode-000000/frame-00000004.json": {
+        "sha256": "2ea8750023145ea5b4ce30e8beea3f247eb5f965313a8224cb95cf5b6b512c96",
+        "bytes": 5552
+      },
+      "videos/observation.images.front/chunk-000/file-000.mp4": {
+        "sha256": "51d88f0d8a3d5529fdc9cd334d591b0d0ca00888a5537b40ffbf0dffaf69cdee",
+        "bytes": 407252
+      },
+      "videos/observation.images.wrist/chunk-000/file-000.mp4": {
+        "sha256": "e6b21c6e254670f8167eb8ba06153795da78ef7240976c3b1f16de7982a57eea",
+        "bytes": 358784
+      },
+      "data/chunk-000/file-000.parquet": {
+        "sha256": "700c5eeb7af20ea68afdb52175ea75daf6117d8cddb2de79fdf1d98d9817db26",
+        "bytes": 12478
+      }
+    }
+  },
+  "scope_exclusions": [
+    "physical follower operation",
+    "manual full-range dynamic tracking accuracy",
+    "task success or learning performance"
+  ],
+  "production_code_changed": false
+}
